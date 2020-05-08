@@ -1,0 +1,55 @@
+.TypeSelect {
+  position: relative;
+  z-index: 2;
+  height: 45px;
+  line-height: 45px;
+  background-color: #fff;
+  width: 120px;
+  .Pop {
+    background-color: #fff;
+    width: 160px;
+    box-shadow: 0px 0px 5px #aaa;
+    position: absolute;
+    transform: translateY(100%);
+    bottom: 0;
+    left: 0;
+    line-height: 50px;
+    .Option {
+      background-color: #fff;
+      text-align: left;
+      display: block;
+      border: none;
+      width: 100%;
+      padding: 0 20px;
+      height: 50px;
+      &.Active {
+        background-color: #f5f5f5;
+        &::before {
+          content: '✓';
+          position: absolute;
+          right: 0px;
+          color: rgba(255, 174, 0, 0.671);
+          display: block;
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
+  .dropdown {
+    display: inline-block;
+    margin: 0px 20px;
+    width: 0px;
+    border: 5px solid;
+    border-color: #666 transparent transparent transparent;
+  }
+  .Mask {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
