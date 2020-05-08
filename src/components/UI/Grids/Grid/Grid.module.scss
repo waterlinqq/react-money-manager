@@ -1,0 +1,16 @@
+.Grid {
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s all ease-in-out;
+  img {
+    width: 35%;
+    padding-bottom: 8px;
+  }
+  &:active {
+    background-color: #eee;
+  }
+}
