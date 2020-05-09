@@ -4,3 +4,11 @@ export interface IIcon {
   text: string
   url: string
 }
+
+export interface IRecord {
+  id: string
+  amount: number
+  category: string
+  type: Spending
+  date: string
+}
