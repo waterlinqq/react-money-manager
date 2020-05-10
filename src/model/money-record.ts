@@ -16,31 +16,48 @@ class MoneyRecord extends BaseModel {
     localStorage.getItem(MONEYRECORD) || '[]'
   ).map((item: any) => Object.setPrototypeOf(item, MoneyRecord.prototype))
   public save() {
-    if (!MoneyRecord.data.includes(this)) {
-      MoneyRecord.data.push(this)
-    }
-    localStorage.setItem(MONEYRECORD, JSON.stringify(MoneyRecord.data))
+    return new Promise((resolve, reject) => {
+      if (!MoneyRecord.data.includes(this)) {
+        MoneyRecord.data.push(this)
+      }
+      localStorage.setItem(MONEYRECORD, JSON.stringify(MoneyRecord.data))
+      resolve(this)
+    })
   }
   public delete() {
-    const data = MoneyRecord.data
-    const idx = data.findIndex((item) => item.id === this.id)
-    data.splice(idx, 1)
-    localStorage.setItem(MONEYRECORD, JSON.stringify(data))
+    return new Promise((resolve, reject) => {
+      const data = MoneyRecord.data
+      const idx = data.findIndex((item) => item.id === this.id)
+      if (idx === -1) {
+        reject(false)
+      }
+      data.splice(idx, 1)
+      localStorage.setItem(MONEYRECORD, JSON.stringify(data))
+      resolve(true)
+    })
   }
   public static delete(id: string) {
-    const data = MoneyRecord.data
-    const idx = data.findIndex((item) => item.id === id)
-    if (idx === -1) {
-      return
-    }
-    data.splice(idx, 1)
-    localStorage.setItem(MONEYRECORD, JSON.stringify(data))
+    return new Promise((resolve, reject) => {
+      const data = MoneyRecord.data
+      const idx = data.findIndex((item) => item.id === id)
+      if (idx === -1) {
+        reject(false)
+      }
+      data.splice(idx, 1)
+      localStorage.setItem(MONEYRECORD, JSON.stringify(data))
+      resolve(true)
+    })
   }
-  public static find(key?: keyof MoneyRecord, value?: string | number) {
-    if (key == null) {
-      return this.data
-    }
-    return this.data.filter((item) => item[key] === value)
+  public static find(
+    key?: keyof MoneyRecord,
+    value?: string | number
+  ): Promise<MoneyRecord[]> {
+    return new Promise((resolve, reject) => {
+      if (key == null) {
+        return resolve(this.data)
+      }
+      resolve(this.data.filter((item) => item[key] === value))
+    })
   }
 }
 

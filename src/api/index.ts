@@ -10,12 +10,15 @@ export const reqAddRecord = (
   return new MoneyRecord(...args).save()
 }
 
-export const reqUpdateRecord = (id: string, config: Partial<MoneyRecord>) => {
-  const [record] = MoneyRecord.find('id', id)
+export const reqUpdateRecord = async (
+  id: string,
+  config: Partial<MoneyRecord>
+) => {
+  const [record] = await MoneyRecord.find('id', id)
   const newRecord = Object.assign(record, config)
-  newRecord.save()
+  return newRecord.save()
 }
 
 export const reqDeleteRecord = (id: string) => {
-  MoneyRecord.delete(id)
+  return MoneyRecord.delete(id)
 }

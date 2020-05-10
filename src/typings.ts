@@ -6,7 +6,7 @@ export interface IIcon {
 }
 
 export interface IRecord {
-  id: string
+  id?: string
   amount: number
   category: string
   type: Spending
