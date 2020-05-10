@@ -34,11 +34,10 @@ const DayRecord: FC<IProps> = ({ dayData }) => {
       </div>
       <List>
         {dayData.map((item) => (
-          <Link to={`/detail/${item.id}`}>
+          <Link key={item.id} to={`/detail/${item.id}`}>
             <Item
-              key={item.id}
-              thumb={require(`../../../../assets/images/icons/${item.category}.svg`)}
-              extra={item.type === 'cost' ? '-' : '' + item.amount}
+              thumb={require(`images/icons/${item.category}.svg`)}
+              extra={(item.type === 'cost' ? '-' : '') + item.amount}
             >
               {item.category}
             </Item>
