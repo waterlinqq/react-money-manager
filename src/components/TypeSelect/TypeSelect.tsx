@@ -41,7 +41,7 @@ const TypeSelect: FC<IProps> = ({ changed, type }) => {
         style={{ display: isShow ? 'block' : 'none' }}
         onClick={() => setIsShow(false)}
       />
-      <div onClick={() => setIsShow(!isShow)}>
+      <div className={classes.Main} onClick={() => setIsShow(!isShow)}>
         <span>{trans(type)}</span>
         <span className={classes.dropdown} />
       </div>

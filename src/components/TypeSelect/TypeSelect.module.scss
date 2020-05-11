@@ -4,7 +4,11 @@
   height: 45px;
   line-height: 45px;
   background-color: #fff;
-  width: 120px;
+
+  .Main {
+    display: flex;
+    align-items: center;
+  }
   .Pop {
     background-color: #fff;
     width: 160px;

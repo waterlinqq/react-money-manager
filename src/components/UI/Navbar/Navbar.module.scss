@@ -1,9 +1,27 @@
 .Navbar {
   height: 45px;
   nav {
+    box-sizing: border-box;
+    z-index: 99;
     width: 100%;
     position: fixed;
     background-color: white;
+    padding: 0 12px;
     height: 45px;
+    display: flex;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    box-shadow: 0px 2px 3px #999;
+    > *:nth-child(1) {
+      justify-self: start;
+    }
+    > *:nth-child(2) {
+      justify-self: center;
+    }
+    > *:nth-child(3) {
+      justify-self: end;
+    }
   }
 }
