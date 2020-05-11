@@ -14,7 +14,8 @@ export const recordReducer = (
     }
     case DEL_RECORD: {
       const idx = state.findIndex((rec) => rec.id === action.payload)
-      return state.splice(idx, 1).slice()
+      state.splice(idx, 1)
+      return state.slice()
     }
     case MOD_RECORD: {
       const idx = state.findIndex((rec) => rec.id === action.payload.id)

@@ -1,7 +1,7 @@
 import MoneyRecord from '../model/money-record'
 
-export const reqGetRecord = () => {
-  return MoneyRecord.find()
+export const reqGetRecord = (...args: Parameters<typeof MoneyRecord.find>) => {
+  return MoneyRecord.find(...args)
 }
 
 export const reqAddRecord = (

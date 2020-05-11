@@ -30,6 +30,7 @@ class Detail extends Component<RouteComponentProps<{ id: string }> & IProps> {
     const { id } = this.props.match.params
     const [record] = await reqGetRecord('id', id)
     this.setState({
+      id: record.id,
       type: record.type,
       amount: record.amount,
       category: record.category,

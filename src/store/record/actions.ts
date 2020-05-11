@@ -81,7 +81,6 @@ export const modRecord = ({
 export const delRecord = (id: string): ThunkResult<void> => async (
   dispatch
 ) => {
-  alert(123)
   await reqDeleteRecord(id)
   dispatch(recordDel(id))
 }
