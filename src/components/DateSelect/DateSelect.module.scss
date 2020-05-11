@@ -1,0 +1,20 @@
+.DateSelect {
+  padding: 0px 10px;
+  height: 45px;
+  line-height: 45px;
+  .Toggle {
+    display: flex;
+    align-items: center;
+    span {
+      display: flex;
+      white-space: nowrap;
+    }
+  }
+  .Dropdown {
+    display: inline-block;
+    margin: 0px 20px;
+    width: 0px;
+    border: 5px solid;
+    border-color: #666 transparent transparent transparent;
+  }
+}
