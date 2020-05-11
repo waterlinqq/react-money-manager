@@ -48,8 +48,15 @@ export const addRecord = ({
   amount,
   category,
   date,
+  mark,
 }: IRecord): ThunkResult<void> => async (dispatch) => {
-  const record = (await reqAddRecord(type, amount, date, category)) as IRecord
+  const record = (await reqAddRecord(
+    type,
+    amount,
+    date,
+    category,
+    mark
+  )) as IRecord
   dispatch(recordAdd(record))
 }
 
@@ -59,12 +66,14 @@ export const modRecord = ({
   amount,
   category,
   date,
+  mark,
 }: Required<IRecord>): ThunkResult<void> => async (dispatch) => {
   const record = (await reqUpdateRecord(id, {
     type,
     amount,
     category,
     date,
+    mark,
   })) as IRecord
   dispatch(recordMod(record))
 }
@@ -72,6 +81,7 @@ export const modRecord = ({
 export const delRecord = (id: string): ThunkResult<void> => async (
   dispatch
 ) => {
+  alert(123)
   await reqDeleteRecord(id)
   dispatch(recordDel(id))
 }

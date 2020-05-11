@@ -22,7 +22,7 @@ export const recordReducer = (
       return state.slice()
     }
     case GET_RECORD: {
-      return action.payload
+      return action.payload.slice()
     }
     default: {
       return state

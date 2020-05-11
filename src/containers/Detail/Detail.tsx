@@ -23,6 +23,7 @@ class Detail extends Component<RouteComponentProps<{ id: string }> & IProps> {
     amount: 0,
     category: '',
     date: '',
+    mark: '',
     isLoading: true,
   }
   public async componentDidMount() {
@@ -33,6 +34,7 @@ class Detail extends Component<RouteComponentProps<{ id: string }> & IProps> {
       amount: record.amount,
       category: record.category,
       date: record.date,
+      mark: record.mark,
       isLoading: false,
     })
   }
@@ -48,7 +50,7 @@ class Detail extends Component<RouteComponentProps<{ id: string }> & IProps> {
     if (this.state.isLoading) {
       return null
     }
-    const { category, date, amount, type, id } = this.state
+    const { category, date, amount, type, mark, id } = this.state
     const { go } = this.props.history
     const day =
       '週' + ['日', '一', '二', '三', '四', '五', '六'][dayjs(date).day()]
@@ -67,10 +69,9 @@ class Detail extends Component<RouteComponentProps<{ id: string }> & IProps> {
         />
         <WhiteSpace />
         <WingBlank>
-          <div className={classes.Content}>
+          <div className={classes.Info}>
             <header>
               <img
-                className={type === '支出' ? 'outgo-img' : 'income-img'}
                 src={require(`images/icons/${category}.svg`)}
                 alt={category}
               />
@@ -92,7 +93,7 @@ class Detail extends Component<RouteComponentProps<{ id: string }> & IProps> {
               </Item>
               <Item>
                 <span className={classes.Title}>備註</span>
-                <span className="content">{'mark'}</span>
+                <span className="content">{mark}</span>
               </Item>
             </List>
             <Edit to={'/log/' + id} />

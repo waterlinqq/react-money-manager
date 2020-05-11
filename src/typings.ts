@@ -11,4 +11,5 @@ export interface IRecord {
   category: string
   type: Spending
   date: string
+  mark: string
 }

@@ -8,7 +8,8 @@ class MoneyRecord extends BaseModel {
     public type: string,
     public amount: number,
     public date: string,
-    public category: string
+    public category: string,
+    public mark: string
   ) {
     super()
   }

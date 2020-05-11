@@ -8,6 +8,7 @@ interface IProps {
   mark: string
   markChanged(v: string): any
   amountChanged(v: number): any
+  submit(): void
 }
 const Inputs: FC<IProps> = ({
   category,
@@ -15,6 +16,7 @@ const Inputs: FC<IProps> = ({
   markChanged,
   mark,
   amountChanged,
+  submit,
 }) => {
   const numberInput = useRef(null)
   useEffect(() => {
@@ -25,7 +27,7 @@ const Inputs: FC<IProps> = ({
       {category ? (
         <img
           className={classes.Icon}
-          src={require(`../../../assets/images/icons/${category}.svg`)}
+          src={require(`images/icons/${category}.svg`)}
           alt={category}
         />
       ) : null}
@@ -42,7 +44,7 @@ const Inputs: FC<IProps> = ({
           ref={numberInput}
           type={'money'}
           onChange={(val) => amountChanged(Number(val))}
-          // onVirtualKeyboardConfirm
+          onVirtualKeyboardConfirm={submit}
           value={String(amount)}
         />
       </div>
