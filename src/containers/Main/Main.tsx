@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Balance from './Balance/Balance'
 import Add from 'components/Add/Add'
 import Navbar from 'components/UI/Navbar/Navbar'
+import Sidebar from './Sidebar/Sidebar'
 import MonthSelect from 'components/MonthSelect/MonthSelect'
 import MonthRecord from 'components/MonthRecord/MonthRecord'
 import { AppState } from 'store'
@@ -27,6 +28,9 @@ class Main extends Component<IProps, IState> {
   public state = {
     isShowSidebar: false,
   }
+  public leftSidebarHandler = () => {
+    this.setState({ isShowSidebar: false })
+  }
   public clickSidebarHandler = () => {
     this.setState({ isShowSidebar: !this.state.isShowSidebar })
   }
@@ -38,7 +42,10 @@ class Main extends Component<IProps, IState> {
     const proxyRecords = proxyR(records)
     return (
       <div className={classes.Main}>
-        {/* <Sidebar isShowSidebar={isShowSidebar} setIsShowSidebar={setIsShowSidebar} /> */}
+        <Sidebar
+          show={this.state.isShowSidebar}
+          onLeft={this.leftSidebarHandler}
+        />
         <Navbar
           leftIcon={<Icon type="ellipsis" onClick={this.clickSidebarHandler} />}
           mainItem={
