@@ -4,10 +4,10 @@ import { List } from 'antd-mobile'
 import { Link } from 'react-router-dom'
 
 import classes from './DayRecord.module.scss'
-import { IRecord } from 'typings'
+import { IDbRecord } from 'typings'
 
 interface IProps {
-  dayData: IRecord[]
+  dayData: IDbRecord[]
 }
 
 const Item = List.Item

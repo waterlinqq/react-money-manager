@@ -53,6 +53,10 @@ class LogRecord extends Component<RouteComponentProps & IProps, IState> {
   public dateChangeHandler = (date: string) => this.setState({ date })
   public submitHandler = () => {
     const { type, amount, category, date, mark } = this.state
+    if (category === '') {
+      alert('請選擇類別')
+      return
+    }
     this.props.addRecord({ type, amount, category, date, mark })
     this.props.history.go(-1)
   }

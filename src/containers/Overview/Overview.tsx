@@ -11,11 +11,11 @@ import { monthSet } from 'store/month/actions'
 import { AppState } from 'store'
 import { proxyR } from 'utils/other'
 
-import { Spending, IRecord } from 'typings.js'
+import { Spending, IDbRecord } from 'typings.js'
 
 interface IProps {
   type: Spending
-  records: IRecord[]
+  records: IDbRecord[]
   month: Date
   monthSet: typeof monthSet
 }

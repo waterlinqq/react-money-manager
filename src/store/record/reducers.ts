@@ -1,13 +1,13 @@
 import { ADD_RECORD, MOD_RECORD, DEL_RECORD, GET_RECORD } from './action-types'
 import { RecordActionTypes } from './actions'
-import { IRecord } from 'typings'
+import { IDbRecord } from 'typings'
 
-const initialState: IRecord[] = []
+const initialState: IDbRecord[] = []
 
 export const recordReducer = (
   state = initialState,
   action: RecordActionTypes
-): IRecord[] => {
+): IDbRecord[] => {
   switch (action.type) {
     case ADD_RECORD: {
       return [action.payload, ...state]

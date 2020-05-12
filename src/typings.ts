@@ -6,10 +6,13 @@ export interface IIcon {
 }
 
 export interface IRecord {
-  id?: string
-  amount: number
-  category: string
   type: Spending
+  amount: number
   date: string
+  category: string
   mark: string
+}
+
+export interface IDbRecord extends IRecord {
+  readonly id: string
 }

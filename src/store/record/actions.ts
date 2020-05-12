@@ -5,24 +5,24 @@ import {
   reqDeleteRecord,
   reqGetRecord,
 } from 'api'
-import { IRecord } from 'typings'
+import { IDbRecord, IRecord } from 'typings'
 import { ThunkAction } from 'redux-thunk'
 import { AppState } from '../index'
 
 type ThunkResult<R> = ThunkAction<any, AppState, undefined, any>
 interface IRecordAddAction {
   type: typeof ADD_RECORD
-  payload: IRecord
+  payload: IDbRecord
 }
-const recordAdd = (record: IRecord): IRecordAddAction => ({
+const recordAdd = (record: IDbRecord): IRecordAddAction => ({
   type: ADD_RECORD,
   payload: record,
 })
 interface IRecordModAction {
   type: typeof MOD_RECORD
-  payload: IRecord
+  payload: IDbRecord
 }
-const recordMod = (record: IRecord): IRecordModAction => ({
+const recordMod = (record: IDbRecord): IRecordModAction => ({
   type: MOD_RECORD,
   payload: record,
 })
@@ -36,45 +36,23 @@ const recordDel = (id: string): IRecordDelAction => ({
 })
 interface IRecordGetAction {
   type: typeof GET_RECORD
-  payload: IRecord[]
+  payload: IDbRecord[]
 }
-const recordGet = (records: IRecord[]): IRecordGetAction => ({
+const recordGet = (records: IDbRecord[]): IRecordGetAction => ({
   type: GET_RECORD,
   payload: records,
 })
-
-export const addRecord = ({
-  type,
-  amount,
-  category,
-  date,
-  mark,
-}: IRecord): ThunkResult<void> => async (dispatch) => {
-  const record = (await reqAddRecord(
-    type,
-    amount,
-    date,
-    category,
-    mark
-  )) as IRecord
-  dispatch(recordAdd(record))
+export const addRecord = (option: IRecord): ThunkResult<void> => async (
+  dispatch
+) => {
+  const record = await reqAddRecord(option)
+  dispatch(recordAdd(record as IDbRecord))
 }
 
-export const modRecord = ({
-  id,
-  type,
-  amount,
-  category,
-  date,
-  mark,
-}: Required<IRecord>): ThunkResult<void> => async (dispatch) => {
-  const record = (await reqUpdateRecord(id, {
-    type,
-    amount,
-    category,
-    date,
-    mark,
-  })) as IRecord
+export const modRecord = (option: IDbRecord): ThunkResult<void> => async (
+  dispatch
+) => {
+  const record = (await reqUpdateRecord(option.id, option)) as IDbRecord
   dispatch(recordMod(record))
 }
 
@@ -86,7 +64,7 @@ export const delRecord = (id: string): ThunkResult<void> => async (
 }
 
 export const getRecord = (): ThunkResult<void> => async (dispatch) => {
-  const records = (await reqGetRecord()) as IRecord[]
+  const records = (await reqGetRecord()) as IDbRecord[]
   dispatch(recordGet(records))
 }
 
