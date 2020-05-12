@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { WingBlank, NoticeBar, Icon, WhiteSpace } from 'antd-mobile'
 import { connect } from 'react-redux'
 
-import Balance from 'components/Balance/Balance'
+import Balance from './Balance/Balance'
 import Add from 'components/Add/Add'
 import Navbar from 'components/UI/Navbar/Navbar'
 import MonthSelect from 'components/MonthSelect/MonthSelect'
 import MonthRecord from 'components/MonthRecord/MonthRecord'
 import { AppState } from 'store'
 import { monthSet } from 'store/month/actions'
+import { proxyR } from 'utils/other'
 
 import classes from './Main.module.scss'
 
@@ -33,7 +34,8 @@ class Main extends Component<IProps, IState> {
     this.props.monthSet(date)
   }
   public render() {
-    const monthData = this.props.records
+    const { records } = this.props
+    const proxyRecords = proxyR(records)
     return (
       <div className={classes.Main}>
         {/* <Sidebar isShowSidebar={isShowSidebar} setIsShowSidebar={setIsShowSidebar} /> */}
@@ -48,7 +50,11 @@ class Main extends Component<IProps, IState> {
         />
         <WingBlank>
           <WhiteSpace />
-          <Balance costTotal={123} benefitTotal={21414} balance={123} />
+          <Balance
+            costTotal={proxyRecords.costTotal}
+            benefitTotal={proxyRecords.benefitTotal}
+            balance={proxyRecords.balance}
+          />
           <WhiteSpace />
           <NoticeBar
             mode="closable"
@@ -58,7 +64,7 @@ class Main extends Component<IProps, IState> {
             請儘快登入，避免丟失數據
           </NoticeBar>
           <WhiteSpace />
-          <MonthRecord monthData={monthData} />
+          <MonthRecord monthData={records} />
         </WingBlank>
         <Add />
       </div>
