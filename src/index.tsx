@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import './model/firebase'
 
 import App from 'containers/App/App'
 import configureStore from 'store'
