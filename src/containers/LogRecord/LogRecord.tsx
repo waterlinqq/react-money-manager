@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { Icon } from 'antd-mobile'
 
 import Navbar from 'components/UI/Navbar/Navbar'
 import Grids from 'components/UI/Grids/Grids'
 import TypeSelect from 'components/TypeSelect/TypeSelect'
 import Inputs from 'components/Inputs/Inputs'
+import DateSelect from 'components/DateSelect/DateSelect'
+import { addRecord } from 'store/record/actions'
 
 import { IIcon, Spending } from 'typings'
+import dayjs from 'dayjs'
 
 const icons: Array<Omit<IIcon, 'url'>> = [
   { type: 'cost', text: '食物' },
@@ -17,42 +23,57 @@ const icons: Array<Omit<IIcon, 'url'>> = [
   { type: 'cost', text: '寵物' },
   { type: 'benefit', text: '寵物' },
 ]
-
+interface IProps {
+  addRecord: typeof addRecord
+}
 interface IState {
   type: Spending
   amount: number
   mark: string
   category: any
+  date: string
 }
-class LogRecord extends Component<any, IState> {
+class LogRecord extends Component<RouteComponentProps & IProps, IState> {
   public state = {
     type: 'cost' as Spending,
     amount: 0,
     mark: '',
     category: '',
+    date: dayjs().format('YYYY-MM-DD'),
   }
-  public changeTypeHandler = (changeType: Spending) =>
-    this.setState({ type: changeType })
+
   public gridClickHandler = (category: string) => {
     this.setState({
       category,
     })
   }
+  public typeChangeHandler = (type: Spending) => this.setState({ type })
   public amountChangeHandler = (amount: number) => this.setState({ amount })
   public markChangeHandler = (mark: string) => this.setState({ mark })
+  public dateChangeHandler = (date: string) => this.setState({ date })
+  public submitHandler = () => {
+    const { type, amount, category, date, mark } = this.state
+    this.props.addRecord({ type, amount, category, date, mark })
+    this.props.history.go(-1)
+  }
   public render() {
-    const { type, amount, category, mark } = this.state
+    const { type, amount, category, mark, date } = this.state
     const iconsWithImg: IIcon[] = icons
       .filter((item) => item.type === type)
       .map((item) => ({
         ...item,
-        url: require(`../../../assets/images/icons/${item.text}.svg`),
+        url: require(`images/icons/${item.text}.svg`),
       }))
     return (
       <div>
         <Navbar
-          leftIcon={<h1>123</h1>}
-          mainItem={<TypeSelect type={type} changed={this.changeTypeHandler} />}
+          leftIcon={
+            <Icon type="left" onClick={() => this.props.history.go(-1)} />
+          }
+          mainItem={<TypeSelect type={type} changed={this.typeChangeHandler} />}
+          rightIcon={
+            <DateSelect date={date} dateChanged={this.dateChangeHandler} />
+          }
         />
         <Grids icons={iconsWithImg} clicked={this.gridClickHandler} />
         <Inputs
@@ -61,10 +82,11 @@ class LogRecord extends Component<any, IState> {
           category={category}
           amountChanged={this.amountChangeHandler}
           markChanged={this.markChangeHandler}
+          submit={this.submitHandler}
         />
       </div>
     )
   }
 }
 
-export default LogRecord
+export default withRouter(connect(() => ({}), { addRecord })(LogRecord))
