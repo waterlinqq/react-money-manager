@@ -8,16 +8,22 @@ import Main from '../Main/Main'
 import Detail from '../Detail/Detail'
 import Overview from '../Overview/Overview'
 import { AppState } from 'store'
+import { listenAuth } from 'utils/auth'
+import { User } from 'typings'
 
 interface IProps {
   getRecord: typeof getRecord
   month: Date
+  user: User
 }
 class App extends Component<IProps> {
   public componentDidMount() {
     this.props.getRecord(this.props.month)
+    listenAuth()
   }
-  public componentDidUpdate = this.componentDidMount
+  public componentDidUpdate() {
+    this.props.getRecord(this.props.month)
+  }
   public render() {
     return (
       <BrowserRouter>
@@ -33,7 +39,10 @@ class App extends Component<IProps> {
   }
 }
 
-const mapStateToProps = (state: AppState) => ({ month: state.month })
+const mapStateToProps = (state: AppState) => ({
+  month: state.month,
+  user: state.user,
+})
 export default connect(mapStateToProps, {
   getRecord,
 })(App)

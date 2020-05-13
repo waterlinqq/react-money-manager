@@ -1,10 +1,5 @@
 import { ADD_RECORD, MOD_RECORD, DEL_RECORD, GET_RECORD } from './action-types'
-import {
-  reqAddRecord,
-  reqUpdateRecord,
-  reqDeleteRecord,
-  reqGetRecord,
-} from 'api'
+import API from 'api'
 import { IRecord, IFbRecord, IFbRecords } from 'typings'
 import { ThunkAction } from 'redux-thunk'
 import { AppState } from '../index'
@@ -48,7 +43,7 @@ const recordGet = (records: IFbRecords): IRecordGetAction => ({
 export const addRecord = (option: IRecord): ThunkResult<void> => async (
   dispatch
 ) => {
-  const record = await reqAddRecord(option)
+  const record = await API.reqAddRecord(option)
   dispatch(recordAdd(record as IFbRecord))
 }
 
@@ -56,21 +51,21 @@ export const modRecord = (
   key: string,
   option: Partial<IRecord>
 ): ThunkResult<void> => async (dispatch) => {
-  await reqUpdateRecord(key, option)
+  await API.reqUpdateRecord(key, option)
   dispatch(recordMod({ key, value: option }))
 }
 
 export const delRecord = (key: string): ThunkResult<void> => async (
   dispatch
 ) => {
-  await reqDeleteRecord(key)
+  await API.reqDeleteRecord(key)
   dispatch(recordDel(key))
 }
 
 export const getRecord = (filter: Date | string): ThunkResult<void> => async (
   dispatch
 ) => {
-  const records = await reqGetRecord(filter)
+  const records = await API.reqGetRecord(filter)
   dispatch(recordGet(records as IFbRecords))
 }
 

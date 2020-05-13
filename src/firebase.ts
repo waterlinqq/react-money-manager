@@ -1,7 +1,6 @@
 import * as firebase from 'firebase/app'
-import 'firebase/analytics'
 import 'firebase/auth'
-import 'firebase/firestore'
+import { userSet } from 'store/user/actions'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDmDtZQueyX0QHZjFBCFwSNdorl2H8HAIw',

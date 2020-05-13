@@ -3,7 +3,7 @@ import { WingBlank, List, WhiteSpace, Icon } from 'antd-mobile'
 import dayjs from 'dayjs'
 import { connect } from 'react-redux'
 import { delRecord } from 'store/record/actions'
-import { reqGetRecord } from 'api'
+import API from 'api'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import Edit from 'components/Edit/Edit'
@@ -28,7 +28,7 @@ class Detail extends Component<RouteComponentProps<{ key: string }> & IProps> {
   }
   public async componentDidMount() {
     const { key } = this.props.match.params
-    const records = await reqGetRecord(key)
+    const records = await API.reqGetRecord(key)
     const record = Object.values(records)[0]
     this.setState({
       key,

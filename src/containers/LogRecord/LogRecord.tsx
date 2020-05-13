@@ -9,7 +9,7 @@ import TypeSelect from 'components/TypeSelect/TypeSelect'
 import Inputs from 'components/Inputs/Inputs'
 import DateSelect from 'components/DateSelect/DateSelect'
 import { addRecord, modRecord } from 'store/record/actions'
-import { reqGetRecord } from 'api/index'
+import API from 'api'
 
 import { IIcon, Spending } from 'typings'
 import dayjs from 'dayjs'
@@ -51,7 +51,7 @@ class LogRecord extends Component<
     if (key == null) {
       return
     }
-    const records = await reqGetRecord(key)
+    const records = await API.reqGetRecord(key)
     const record = records[key]
     this.setState({
       type: record.type as Spending,

@@ -25,3 +25,10 @@ export interface IFbRecord {
   key: string
   value: IRecord
 }
+
+export type User = null | {
+  displayName: string | null
+  email: string | null
+  photoURL: string | null
+  uid: string
+}

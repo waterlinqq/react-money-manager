@@ -7,15 +7,16 @@ import Modal from 'components/UI/Modal/Modal'
 import Mask from 'components/UI/Mask/Mask'
 import Review from './Review/Review'
 import About from './About/About'
+import { login, logout } from 'utils/auth'
 import { AppState } from 'store'
 import { exportData } from './ExportData'
 
 import classes from './Sidebar.module.scss'
 
-import { IFbRecords } from 'typings'
+import { IFbRecords, User } from 'typings'
 
 const Item = List.Item
-const Avatar = <h3>您好， 尚未啟用帳號管理功能。</h3>
+
 const path = (filename: string) =>
   require(`../../../images/system/${filename}.svg`)
 
@@ -23,12 +24,14 @@ interface IProps {
   show: boolean
   onLeft(): void
   records: IFbRecords
+  user: User
 }
 const Sidebar: FC<IProps & RouteComponentProps> = ({
   show,
   onLeft,
   history,
   records,
+  user,
 }) => {
   const [ShowModal, setShowModal] = useState<JSX.Element | null>(null)
   const showModal = (modal: JSX.Element) => () => {
@@ -45,9 +48,10 @@ const Sidebar: FC<IProps & RouteComponentProps> = ({
       </Modal>
 
       <div className={listClassName}>
-        <div className={classes.Avatar} onClick={showModal(Avatar)}>
-          <img src={path('登入')} alt="" />
-          <p>登入</p>
+        <div className={classes.Avatar} onClick={user ? logout : login}>
+          <img src={user?.photoURL || path('登入')} alt="" />
+          <p>{user ? '登出' : '登入'}</p>
+          <p>{user?.displayName || ''}</p>
         </div>
         <List>
           <Item
@@ -101,5 +105,8 @@ const Sidebar: FC<IProps & RouteComponentProps> = ({
     </div>
   )
 }
-const mapStateToProps = (state: AppState) => ({ records: state.records })
+const mapStateToProps = (state: AppState) => ({
+  records: state.records,
+  user: state.user,
+})
 export default withRouter(connect(mapStateToProps)(Sidebar))
