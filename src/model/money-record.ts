@@ -1,10 +1,13 @@
 import BaseModel from './base-model'
 import { IRecord } from 'typings'
+import dayjs from 'dayjs'
 
 const MONEYRECORD = 'MONEYRECORD'
+interface IMoneyRecords {
+  [key: string]: MoneyRecord
+}
 
 class MoneyRecord extends BaseModel {
-  public readonly id = Date.now() + ' ' + Math.random()
   public type: string
   public amount: number
   public date: string
@@ -18,51 +21,69 @@ class MoneyRecord extends BaseModel {
     this.category = category
     this.mark = mark
   }
-  public static data: MoneyRecord[] = JSON.parse(
-    localStorage.getItem(MONEYRECORD) || '[]'
-  ).map((item: any) => Object.setPrototypeOf(item, MoneyRecord.prototype))
+  public static data: IMoneyRecords = JSON.parse(
+    localStorage.getItem(MONEYRECORD) || '{}'
+  )
   public save() {
-    return new Promise<MoneyRecord>((resolve, reject) => {
-      if (!MoneyRecord.data.includes(this)) {
-        MoneyRecord.data.push(this)
-      }
+    return new Promise((resolve, reject) => {
+      const key = Date.now() + ' ' + Math.random()
+      MoneyRecord.data[key] = this
       localStorage.setItem(MONEYRECORD, JSON.stringify(MoneyRecord.data))
-      resolve(this)
+      resolve({ key, value: this })
     })
   }
   public delete() {
-    return new Promise<boolean>((resolve, reject) => {
-      const data = MoneyRecord.data
-      const idx = data.findIndex((item) => item.id === this.id)
-      if (idx === -1) {
-        reject(false)
-      }
-      data.splice(idx, 1)
-      localStorage.setItem(MONEYRECORD, JSON.stringify(data))
-      resolve(true)
-    })
-  }
-  public static delete(id: string) {
-    return new Promise<boolean>((resolve, reject) => {
-      const data = MoneyRecord.data
-      const idx = data.findIndex((item) => item.id === id)
-      if (idx === -1) {
-        reject(false)
-      }
-      data.splice(idx, 1)
-      localStorage.setItem(MONEYRECORD, JSON.stringify(data))
-      resolve(true)
-    })
-  }
-  public static find(
-    key?: keyof MoneyRecord,
-    value?: string | number
-  ): Promise<MoneyRecord[]> {
     return new Promise((resolve, reject) => {
-      if (key == null) {
-        return resolve(this.data)
+      const data = MoneyRecord.data
+      Object.keys(data).some((key) => {
+        if (data[key] === this) {
+          return delete data[key]
+        }
+        return false
+      })
+      localStorage.setItem(MONEYRECORD, JSON.stringify(MoneyRecord.data))
+      resolve(true)
+    })
+  }
+  public update(config: Partial<IRecord>) {
+    return new Promise((resolve, reject) => {
+      Object.assign(this, config)
+      localStorage.setItem(MONEYRECORD, JSON.stringify(MoneyRecord.data))
+      resolve(true)
+    })
+  }
+
+  public static update(key: string, config: Partial<IRecord>) {
+    return new Promise<boolean>((resolve, reject) => {
+      Object.assign(this.data[key], config)
+      localStorage.setItem(MONEYRECORD, JSON.stringify(MoneyRecord.data))
+      resolve(true)
+    })
+  }
+  public static delete(key: string) {
+    return new Promise<boolean>((resolve, reject) => {
+      delete MoneyRecord.data[key]
+      localStorage.setItem(MONEYRECORD, JSON.stringify(MoneyRecord.data))
+      resolve(true)
+    })
+  }
+  public static find(filter?: string | Date): Promise<IMoneyRecords> {
+    return new Promise((resolve, reject) => {
+      if (filter instanceof Date) {
+        const result = {} as IMoneyRecords
+        const startAt = dayjs(filter).format('YYYY-MM-01')
+        const endAt = dayjs(filter).format('YYYY-MM-31')
+        for (const [key, record] of Object.entries(this.data)) {
+          if (record.date >= startAt && record.date <= endAt) {
+            result[key] = record
+          }
+        }
+        resolve(result)
+      } else if (typeof filter === 'string') {
+        resolve({ [filter]: this.data[filter] })
+      } else {
+        resolve(this.data)
       }
-      resolve(this.data.filter((item) => item[key] === value))
     })
   }
 }
