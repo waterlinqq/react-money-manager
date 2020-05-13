@@ -22,8 +22,8 @@ class App extends Component<IProps> {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/log/" component={LogRecord} />
           <Route path="/log/:key" component={LogRecord} />
+          <Route path="/log/" component={LogRecord} />
           <Route path="/detail/:key" component={Detail} />
           <Route path="/overview/:type" component={Overview} />
           <Route path="/" component={Main} />

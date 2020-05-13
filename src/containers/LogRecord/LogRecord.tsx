@@ -8,7 +8,8 @@ import Grids from 'components/UI/Grids/Grids'
 import TypeSelect from 'components/TypeSelect/TypeSelect'
 import Inputs from 'components/Inputs/Inputs'
 import DateSelect from 'components/DateSelect/DateSelect'
-import { addRecord } from 'store/record/actions'
+import { addRecord, modRecord } from 'store/record/actions'
+import { reqGetRecord } from 'api/index'
 
 import { IIcon, Spending } from 'typings'
 import dayjs from 'dayjs'
@@ -25,6 +26,7 @@ const icons: Array<Omit<IIcon, 'url'>> = [
 ]
 interface IProps {
   addRecord: typeof addRecord
+  modRecord: typeof modRecord
 }
 interface IState {
   type: Spending
@@ -33,7 +35,10 @@ interface IState {
   category: any
   date: string
 }
-class LogRecord extends Component<RouteComponentProps & IProps, IState> {
+class LogRecord extends Component<
+  RouteComponentProps<{ key?: string }> & IProps,
+  IState
+> {
   public state = {
     type: 'cost' as Spending,
     amount: 0,
@@ -41,7 +46,21 @@ class LogRecord extends Component<RouteComponentProps & IProps, IState> {
     category: '',
     date: dayjs().format('YYYY-MM-DD'),
   }
-
+  public async componentWillMount() {
+    const { key } = this.props.match.params
+    if (key == null) {
+      return
+    }
+    const records = await reqGetRecord(key)
+    const record = records[key]
+    this.setState({
+      type: record.type as Spending,
+      amount: record.amount,
+      category: record.category,
+      date: record.date,
+      mark: record.mark,
+    })
+  }
   public gridClickHandler = (category: string) => {
     this.setState({
       category,
@@ -51,13 +70,19 @@ class LogRecord extends Component<RouteComponentProps & IProps, IState> {
   public amountChangeHandler = (amount: number) => this.setState({ amount })
   public markChangeHandler = (mark: string) => this.setState({ mark })
   public dateChangeHandler = (date: string) => this.setState({ date })
-  public submitHandler = () => {
+  public submitHandler = async () => {
     const { type, amount, category, date, mark } = this.state
+    const { key } = this.props.match.params
+    const option = { type, amount, category, date, mark }
     if (category === '') {
       alert('請選擇類別')
       return
     }
-    this.props.addRecord({ type, amount, category, date, mark })
+    if (key != null) {
+      await this.props.modRecord(key, option)
+    } else {
+      await this.props.addRecord(option)
+    }
     this.props.history.go(-1)
   }
   public render() {
@@ -93,4 +118,6 @@ class LogRecord extends Component<RouteComponentProps & IProps, IState> {
   }
 }
 
-export default withRouter(connect(() => ({}), { addRecord })(LogRecord))
+export default withRouter(
+  connect(() => ({}), { addRecord, modRecord })(LogRecord)
+)

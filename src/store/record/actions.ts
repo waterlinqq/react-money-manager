@@ -5,7 +5,7 @@ import {
   reqDeleteRecord,
   reqGetRecord,
 } from 'api'
-import { IDbRecord, IRecord, IFbRecord, IFbRecords } from 'typings'
+import { IRecord, IFbRecord, IFbRecords } from 'typings'
 import { ThunkAction } from 'redux-thunk'
 import { AppState } from '../index'
 
@@ -20,9 +20,12 @@ const recordAdd = (record: IFbRecord): IRecordAddAction => ({
 })
 interface IRecordModAction {
   type: typeof MOD_RECORD
-  payload: IFbRecord
+  payload: { key: string; value: Partial<IRecord> }
 }
-const recordMod = (data: IFbRecord): IRecordModAction => ({
+const recordMod = (data: {
+  key: string
+  value: Partial<IRecord>
+}): IRecordModAction => ({
   type: MOD_RECORD,
   payload: data,
 })
@@ -49,11 +52,12 @@ export const addRecord = (option: IRecord): ThunkResult<void> => async (
   dispatch(recordAdd(record as IFbRecord))
 }
 
-export const modRecord = (option: IDbRecord): ThunkResult<void> => async (
-  dispatch
-) => {
-  const record = await reqUpdateRecord(option.id, option)
-  dispatch(recordMod(record as IFbRecord))
+export const modRecord = (
+  key: string,
+  option: Partial<IRecord>
+): ThunkResult<void> => async (dispatch) => {
+  await reqUpdateRecord(key, option)
+  dispatch(recordMod({ key, value: option }))
 }
 
 export const delRecord = (key: string): ThunkResult<void> => async (

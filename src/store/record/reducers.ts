@@ -19,7 +19,7 @@ export const recordReducer = (
     }
     case MOD_RECORD: {
       const { key, value } = action.payload
-      state[key] = value
+      state[key] = Object.assign(state[key], value)
       return { ...state }
     }
     case GET_RECORD: {
