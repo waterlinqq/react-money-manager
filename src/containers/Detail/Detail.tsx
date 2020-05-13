@@ -16,9 +16,9 @@ const Item = List.Item
 interface IProps {
   delRecord: typeof delRecord
 }
-class Detail extends Component<RouteComponentProps<{ id: string }> & IProps> {
+class Detail extends Component<RouteComponentProps<{ key: string }> & IProps> {
   public state = {
-    id: '',
+    key: '',
     type: '',
     amount: 0,
     category: '',
@@ -27,10 +27,11 @@ class Detail extends Component<RouteComponentProps<{ id: string }> & IProps> {
     isLoading: true,
   }
   public async componentDidMount() {
-    const { id } = this.props.match.params
-    const [record] = await reqGetRecord('id', id)
+    const { key } = this.props.match.params
+    const records = await reqGetRecord(key)
+    const record = Object.values(records)[0]
     this.setState({
-      id: record.id,
+      key,
       type: record.type,
       amount: record.amount,
       category: record.category,
@@ -44,14 +45,14 @@ class Detail extends Component<RouteComponentProps<{ id: string }> & IProps> {
       return
     }
 
-    this.props.delRecord(this.state.id)
+    this.props.delRecord(this.state.key)
     this.props.history.go(-1)
   }
   public render() {
     if (this.state.isLoading) {
       return null
     }
-    const { category, date, amount, type, mark, id } = this.state
+    const { category, date, amount, type, mark, key } = this.state
     const { go } = this.props.history
     const day =
       '週' + ['日', '一', '二', '三', '四', '五', '六'][dayjs(date).day()]
@@ -97,7 +98,7 @@ class Detail extends Component<RouteComponentProps<{ id: string }> & IProps> {
                 <span className="content">{mark}</span>
               </Item>
             </List>
-            <Edit to={'/log/' + id} />
+            <Edit to={'/log/' + key} />
           </div>
         </WingBlank>
       </div>

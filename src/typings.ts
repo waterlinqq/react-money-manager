@@ -16,3 +16,12 @@ export interface IRecord {
 export interface IDbRecord extends IRecord {
   readonly id: string
 }
+
+export interface IFbRecords {
+  [key: string]: IRecord
+}
+
+export interface IFbRecord {
+  key: string
+  value: IRecord
+}

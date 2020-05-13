@@ -7,21 +7,24 @@ import LogRecord from '../LogRecord/LogRecord'
 import Main from '../Main/Main'
 import Detail from '../Detail/Detail'
 import Overview from '../Overview/Overview'
+import { AppState } from 'store'
 
 interface IProps {
   getRecord: typeof getRecord
+  month: Date
 }
 class App extends Component<IProps> {
-  public componentWillMount() {
-    this.props.getRecord()
+  public componentDidMount() {
+    this.props.getRecord(this.props.month)
   }
+  public componentDidUpdate = this.componentDidMount
   public render() {
     return (
       <BrowserRouter>
         <Switch>
           <Route path="/log/" component={LogRecord} />
-          <Route path="/log/:id" component={LogRecord} />
-          <Route path="/detail/:id" component={Detail} />
+          <Route path="/log/:key" component={LogRecord} />
+          <Route path="/detail/:key" component={Detail} />
           <Route path="/overview/:type" component={Overview} />
           <Route path="/" component={Main} />
         </Switch>
@@ -30,6 +33,7 @@ class App extends Component<IProps> {
   }
 }
 
-export default connect(() => ({}), {
+const mapStateToProps = (state: AppState) => ({ month: state.month })
+export default connect(mapStateToProps, {
   getRecord,
 })(App)

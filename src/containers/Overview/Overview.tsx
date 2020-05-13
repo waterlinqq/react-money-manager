@@ -11,11 +11,11 @@ import { monthSet } from 'store/month/actions'
 import { AppState } from 'store'
 import { proxyR } from 'utils/other'
 
-import { Spending, IDbRecord } from 'typings.js'
+import { Spending, IFbRecords } from 'typings.js'
 
 interface IProps {
   type: Spending
-  records: IDbRecord[]
+  records: IFbRecords
   month: Date
   monthSet: typeof monthSet
 }
@@ -35,12 +35,12 @@ class Overview extends Component<
     const showTotal =
       proxyRecords[type === 'benefit' ? 'benefitTotal' : 'costTotal']
 
-    const categoriesMap = showRecords.reduce((obj, item) => {
-      const cate = item.category
+    const categoriesMap = Object.values(showRecords).reduce((obj, record) => {
+      const cate = record.category
       if (!obj[cate]) {
         obj[cate] = 0
       }
-      obj[cate] += item.amount
+      obj[cate] += record.amount
       return obj
     }, {} as { [c: string]: number })
 

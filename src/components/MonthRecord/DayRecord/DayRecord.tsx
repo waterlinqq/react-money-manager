@@ -4,18 +4,19 @@ import { List } from 'antd-mobile'
 import { Link } from 'react-router-dom'
 
 import classes from './DayRecord.module.scss'
-import { IDbRecord } from 'typings'
+import { IFbRecords } from 'typings'
 
 interface IProps {
-  dayData: IDbRecord[]
+  dayData: IFbRecords
 }
 
 const Item = List.Item
 const DayRecord: FC<IProps> = ({ dayData }) => {
-  const [{ date }] = dayData
-  const { cost, benefit } = dayData.reduce(
-    (accu, item) => {
-      accu[item.type] += item.amount
+  const entries = Object.entries(dayData)
+  const { date } = entries[0][1]
+  const { cost, benefit } = entries.reduce(
+    (accu, [_, record]) => {
+      accu[record.type] += record.amount
       return accu
     },
     { cost: 0, benefit: 0 }
@@ -33,13 +34,13 @@ const DayRecord: FC<IProps> = ({ dayData }) => {
         </div>
       </div>
       <List>
-        {dayData.map((item) => (
-          <Link key={item.id} to={`/detail/${item.id}`}>
+        {entries.map(([key, record]) => (
+          <Link key={key} to={`/detail/${key}`}>
             <Item
-              thumb={require(`images/icons/${item.category}.svg`)}
-              extra={(item.type === 'cost' ? '-' : '') + item.amount}
+              thumb={require(`images/icons/${record.category}.svg`)}
+              extra={(record.type === 'cost' ? '-' : '') + record.amount}
             >
-              {item.category}
+              {record.category}
             </Item>
           </Link>
         ))}

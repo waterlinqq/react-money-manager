@@ -1,17 +1,24 @@
-import { Spending, IRecord } from 'typings'
+import { Spending, IFbRecords } from 'typings'
 
 export const trans = (type: Spending) => (type === 'cost' ? '支出' : '收入')
 export const reverse = (type: Spending): Spending =>
   type === 'cost' ? 'benefit' : 'cost'
-export const proxyR = (records: IRecord[]) => {
-  const costRecords = records.filter((item) => item.type === 'cost')
-  const benefitRecords = records.filter((item) => item.type === 'benefit')
-  const costTotal = costRecords.reduce((accu, item) => accu + item.amount, 0)
-  const benefitTotal = benefitRecords.reduce(
-    (accu, item) => accu + item.amount,
-    0
-  )
-  const balance = benefitTotal - costTotal
+export const proxyR = (records: IFbRecords) => {
+  const costRecords = {} as IFbRecords
+  const benefitRecords = {} as IFbRecords
+  let costTotal = 0
+  let benefitTotal = 0
+  let balance = 0
+  Object.entries(records).forEach(([key, record]) => {
+    if (record.type === 'cost') {
+      costRecords[key] = record
+      costTotal += record.amount
+    } else {
+      benefitRecords[key] = record
+      benefitTotal += record.amount
+    }
+  })
+  balance = benefitTotal - costTotal
   return {
     records,
     costRecords,

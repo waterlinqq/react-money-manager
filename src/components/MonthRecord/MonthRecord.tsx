@@ -1,22 +1,22 @@
 import React, { FC, Fragment } from 'react'
 
 import DayRecord from './DayRecord/DayRecord'
-import { IDbRecord } from 'typings.js'
+import { IFbRecords } from 'typings.js'
 
 interface IProps {
-  monthData: IDbRecord[]
+  monthData: IFbRecords
 }
 interface IMonthDataByDate {
-  [date: string]: IDbRecord[]
+  [date: string]: IFbRecords
 }
 
-const indexByDate = (monthData: IDbRecord[]) => {
-  return monthData.reduce((obj, item) => {
-    const date = item.date
+const indexByDate = (monthData: IFbRecords) => {
+  return Object.entries(monthData).reduce((obj, [key, record]) => {
+    const date = record.date
     if (!obj[date]) {
-      obj[date] = []
+      obj[date] = {} as IFbRecords
     }
-    obj[date].push(item)
+    obj[date][key] = record
     return obj
   }, {} as IMonthDataByDate)
 }

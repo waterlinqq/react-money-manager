@@ -5,40 +5,40 @@ import {
   reqDeleteRecord,
   reqGetRecord,
 } from 'api'
-import { IDbRecord, IRecord } from 'typings'
+import { IDbRecord, IRecord, IFbRecord, IFbRecords } from 'typings'
 import { ThunkAction } from 'redux-thunk'
 import { AppState } from '../index'
 
 type ThunkResult<R> = ThunkAction<any, AppState, undefined, any>
 interface IRecordAddAction {
   type: typeof ADD_RECORD
-  payload: IDbRecord
+  payload: IFbRecord
 }
-const recordAdd = (record: IDbRecord): IRecordAddAction => ({
+const recordAdd = (record: IFbRecord): IRecordAddAction => ({
   type: ADD_RECORD,
   payload: record,
 })
 interface IRecordModAction {
   type: typeof MOD_RECORD
-  payload: IDbRecord
+  payload: IFbRecord
 }
-const recordMod = (record: IDbRecord): IRecordModAction => ({
+const recordMod = (data: IFbRecord): IRecordModAction => ({
   type: MOD_RECORD,
-  payload: record,
+  payload: data,
 })
 interface IRecordDelAction {
   type: typeof DEL_RECORD
   payload: string
 }
-const recordDel = (id: string): IRecordDelAction => ({
+const recordDel = (key: string): IRecordDelAction => ({
   type: DEL_RECORD,
-  payload: id,
+  payload: key,
 })
 interface IRecordGetAction {
   type: typeof GET_RECORD
-  payload: IDbRecord[]
+  payload: IFbRecords
 }
-const recordGet = (records: IDbRecord[]): IRecordGetAction => ({
+const recordGet = (records: IFbRecords): IRecordGetAction => ({
   type: GET_RECORD,
   payload: records,
 })
@@ -46,26 +46,28 @@ export const addRecord = (option: IRecord): ThunkResult<void> => async (
   dispatch
 ) => {
   const record = await reqAddRecord(option)
-  dispatch(recordAdd(record as IDbRecord))
+  dispatch(recordAdd(record as IFbRecord))
 }
 
 export const modRecord = (option: IDbRecord): ThunkResult<void> => async (
   dispatch
 ) => {
-  const record = (await reqUpdateRecord(option.id, option)) as IDbRecord
-  dispatch(recordMod(record))
+  const record = await reqUpdateRecord(option.id, option)
+  dispatch(recordMod(record as IFbRecord))
 }
 
-export const delRecord = (id: string): ThunkResult<void> => async (
+export const delRecord = (key: string): ThunkResult<void> => async (
   dispatch
 ) => {
-  await reqDeleteRecord(id)
-  dispatch(recordDel(id))
+  await reqDeleteRecord(key)
+  dispatch(recordDel(key))
 }
 
-export const getRecord = (): ThunkResult<void> => async (dispatch) => {
-  const records = (await reqGetRecord()) as IDbRecord[]
-  dispatch(recordGet(records))
+export const getRecord = (filter: Date | string): ThunkResult<void> => async (
+  dispatch
+) => {
+  const records = await reqGetRecord(filter)
+  dispatch(recordGet(records as IFbRecords))
 }
 
 export type RecordActionTypes =

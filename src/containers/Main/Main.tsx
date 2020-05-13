@@ -14,13 +14,13 @@ import { proxyR } from 'utils/other'
 
 import classes from './Main.module.scss'
 
-import { IDbRecord } from 'typings'
+import { IFbRecords } from 'typings'
 
 interface IState {
   isShowSidebar: boolean
 }
 interface IProps {
-  records: IDbRecord[]
+  records: IFbRecords
   month: Date
   monthSet: typeof monthSet
 }

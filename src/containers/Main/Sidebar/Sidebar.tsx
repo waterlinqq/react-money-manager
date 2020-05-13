@@ -12,7 +12,7 @@ import { exportData } from './ExportData'
 
 import classes from './Sidebar.module.scss'
 
-import { IDbRecord } from 'typings'
+import { IFbRecords } from 'typings'
 
 const Item = List.Item
 const Avatar = <h3>您好， 尚未啟用帳號管理功能。</h3>
@@ -22,7 +22,7 @@ const path = (filename: string) =>
 interface IProps {
   show: boolean
   onLeft(): void
-  records: IDbRecord[]
+  records: IFbRecords
 }
 const Sidebar: FC<IProps & RouteComponentProps> = ({
   show,

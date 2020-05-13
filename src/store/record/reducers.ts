@@ -1,29 +1,29 @@
 import { ADD_RECORD, MOD_RECORD, DEL_RECORD, GET_RECORD } from './action-types'
 import { RecordActionTypes } from './actions'
-import { IDbRecord } from 'typings'
+import { IFbRecords } from 'typings'
 
-const initialState: IDbRecord[] = []
+const initialState = {} as IFbRecords
 
 export const recordReducer = (
   state = initialState,
   action: RecordActionTypes
-): IDbRecord[] => {
+): IFbRecords => {
   switch (action.type) {
     case ADD_RECORD: {
-      return [action.payload, ...state]
+      const { key, value } = action.payload
+      return { [key]: value, ...state }
     }
     case DEL_RECORD: {
-      const idx = state.findIndex((rec) => rec.id === action.payload)
-      state.splice(idx, 1)
-      return state.slice()
+      delete state[action.payload]
+      return { ...state }
     }
     case MOD_RECORD: {
-      const idx = state.findIndex((rec) => rec.id === action.payload.id)
-      state[idx] = action.payload
-      return state.slice()
+      const { key, value } = action.payload
+      state[key] = value
+      return { ...state }
     }
     case GET_RECORD: {
-      return action.payload.slice()
+      return action.payload
     }
     default: {
       return state

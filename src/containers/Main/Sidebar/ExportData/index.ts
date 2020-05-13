@@ -1,10 +1,11 @@
-import { IDbRecord } from 'typings'
+import { IFbRecords } from 'typings'
 import { trans } from 'utils/other'
 /**
  * Export records to csv string format and download the csv file.
  * @param rows money records to be transfromed
  */
-export const exportData = (rows: IDbRecord[]) => {
+export const exportData = (records: IFbRecords) => {
+  const rows = Object.values(records)
   const flatRows = rows.map((row) => [
     row.category,
     row.amount,
