@@ -1,5 +1,6 @@
 {
   "name": "react-ts",
+  "homepage": "https://github.com/waterlinqq/react-money-manager",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -32,6 +33,7 @@
     "babel-plugin-import": "^1.13.0",
     "cross-env": "^5.2.0",
     "customize-cra": "^0.9.1",
+    "gh-pages": "^2.2.0",
     "react-app-rewired": "^2.1.6",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
@@ -48,7 +50,9 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

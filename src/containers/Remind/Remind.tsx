@@ -78,7 +78,14 @@ class Remind extends Component<RouteComponentProps & IProps> {
                 />
               }
             >
-              <input type="time" value={reminder.time} />
+              <input
+                type="time"
+                value={reminder.time}
+                style={{
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                }}
+              />
             </Item>
           ))}
           <Item
