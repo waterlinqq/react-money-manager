@@ -1,21 +1,36 @@
 import React, { Component } from 'react'
+import momnet, { Moment } from 'moment'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { Icon, List, Switch } from 'antd-mobile'
-// import TimePicker from 'react-time-picker'
 import { TimePicker } from 'antd'
-import 'antd/es/time-picker/style/css'
+
 import Navbar from 'components/UI/Navbar/Navbar'
 import CustomIcon from 'components/UI/CustomIcon/CustomIcon'
-import momnet, { Moment } from 'moment'
+import { AppState } from 'store'
+import { delReminder, modReminder, addReminder } from 'store/reminder/actions'
+
+import 'antd/es/time-picker/style/css'
+import { IFbReminders } from 'typings'
 
 const Item = List.Item
 
-class Remind extends Component<RouteComponentProps> {
+interface IProps {
+  delReminder: typeof delReminder
+  modReminder: typeof modReminder
+  addReminder: typeof addReminder
+  reminders: IFbReminders
+}
+
+class Remind extends Component<RouteComponentProps & IProps> {
   public state = {
     isOpen: false,
     value: momnet(),
   }
-  public changeHandler = (value: Moment | null) => {
+  public pickerChangeHandler = (value: Moment | null) => {
+    if (value) {
+      this.props.addReminder(value.format('HH:mm'))
+    }
     this.setState({
       isOpen: false,
       value,
@@ -42,7 +57,9 @@ class Remind extends Component<RouteComponentProps> {
   }
   public render() {
     const { value, isOpen } = this.state
+    const { reminders, delReminder, modReminder } = this.props
     const go = this.props.history.go
+
     return (
       <div className="Setting">
         <Navbar
@@ -50,21 +67,30 @@ class Remind extends Component<RouteComponentProps> {
           mainItem={<h3>智能提醒</h3>}
         />
         <List>
-          <Item
-            thumb={<Icon type="cross" onClick={() => alert('刪除')} />}
-            extra={<Switch />}
-          >
-            <input type="time" />
-          </Item>
+          {Object.entries(reminders).map(([key, reminder]) => (
+            <Item
+              key={key}
+              thumb={<Icon type="cross" onClick={() => delReminder(key)} />}
+              extra={
+                <Switch
+                  checked={reminder.on}
+                  onChange={(on) => modReminder(key, { on })}
+                />
+              }
+            >
+              <input type="time" value={reminder.time} />
+            </Item>
+          ))}
           <Item
             thumb={<CustomIcon type={require('images/icons/交通.svg')} />}
             onClick={this.clickAddHandler}
           >
-            <span>創建提醒</span>
+            <span>創建提醒 </span>
             <TimePicker
               value={value}
-              onChange={this.changeHandler}
+              onChange={this.pickerChangeHandler}
               open={isOpen}
+              format={'HH:mm'}
             />
           </Item>
         </List>
@@ -72,4 +98,7 @@ class Remind extends Component<RouteComponentProps> {
     )
   }
 }
-export default withRouter(Remind)
+const mapStateToProps = (state: AppState) => ({ reminders: state.reminders })
+export default withRouter(
+  connect(mapStateToProps, { delReminder, modReminder, addReminder })(Remind)
+)

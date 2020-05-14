@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { getRecord } from 'store/record/actions'
+import { getReminder } from 'store/reminder/actions'
 import LogRecord from '../LogRecord/LogRecord'
 import Main from '../Main/Main'
 import Detail from '../Detail/Detail'
@@ -15,17 +16,21 @@ import { User } from 'typings'
 
 interface IProps {
   getRecord: typeof getRecord
+  getReminder: typeof getReminder
   month: Date
   user: User
 }
 class App extends Component<IProps> {
-  public componentDidMount() {
-    this.props.getRecord(this.props.month)
+  public componentWillMount() {
     listenAuth()
   }
-  public componentDidUpdate() {
+  public componentDidMount() {
+    // when connected to google account (user changed)
+    // get records and reminders from firebase
     this.props.getRecord(this.props.month)
+    this.props.getReminder()
   }
+  public componentDidUpdate = this.componentDidMount
   public render() {
     return (
       <BrowserRouter>
@@ -49,4 +54,5 @@ const mapStateToProps = (state: AppState) => ({
 })
 export default connect(mapStateToProps, {
   getRecord,
+  getReminder,
 })(App)
