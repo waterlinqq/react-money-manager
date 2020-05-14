@@ -26,6 +26,18 @@ export interface IFbRecord {
   value: IRecord
 }
 
+export interface IReminder {
+  time: string
+  on: boolean
+}
+export interface IFbReminder {
+  key: string
+  value: IReminder
+}
+export interface IFbReminders {
+  [key: string]: IReminder
+}
+
 export type User = null | {
   displayName: string | null
   email: string | null

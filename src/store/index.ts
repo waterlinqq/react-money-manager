@@ -5,11 +5,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { recordReducer } from './record/reducers'
 import { monthReducer } from './month/reducers'
 import { userReducer } from './user/reducers'
+import { reminderReducer } from './reminder/reducers'
 
 const rootReducer = combineReducers({
   records: recordReducer,
   month: monthReducer,
   user: userReducer,
+  reminders: reminderReducer,
 })
 
 export type AppState = ReturnType<typeof rootReducer>
