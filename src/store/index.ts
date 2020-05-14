@@ -12,9 +12,7 @@ const rootReducer = combineReducers({
   user: userReducer,
 })
 
-export type AppState = ReturnType<typeof rootReducer> &
-  ReturnType<typeof monthReducer> &
-  ReturnType<typeof userReducer>
+export type AppState = ReturnType<typeof rootReducer>
 
 const middlewares = [thunkMiddleware]
 const middleWareEnhancer = applyMiddleware(...middlewares)
