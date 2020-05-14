@@ -1,15 +1,15 @@
 import * as firebase from 'firebase/app'
 import { IRecord, IFbRecords } from 'typings'
 import 'firebase/database'
-import dayjs from 'dayjs'
+import moment from 'moment'
 
 const firebaseRecord = firebase.database().ref('record')
 
 export const reqGetRecord = async (filter: Date | string) => {
   let snapShot
   if (filter instanceof Date) {
-    const startAt = dayjs(filter).format('YYYY-MM-01')
-    const endAt = dayjs(filter).format('YYYY-MM-31')
+    const startAt = moment(filter).format('YYYY-MM-01')
+    const endAt = moment(filter).format('YYYY-MM-31')
     snapShot = await firebaseRecord
       .orderByChild('date')
       .startAt(startAt)

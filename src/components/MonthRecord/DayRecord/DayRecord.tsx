@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import dayjs from 'dayjs'
+import moment from 'moment'
 import { List } from 'antd-mobile'
 import { Link } from 'react-router-dom'
 
@@ -22,8 +22,8 @@ const DayRecord: FC<IProps> = ({ dayData }) => {
     { cost: 0, benefit: 0 }
   )
   const day =
-    '週' + ['日', '一', '二', '三', '四', '五', '六'][dayjs(date).day()]
-  const formatDate = dayjs(date).format('MM/DD')
+    '週' + ['日', '一', '二', '三', '四', '五', '六'][moment(date).day()]
+  const formatDate = moment(date).format('MM/DD')
   return (
     <div className={classes.DayRecord}>
       <div className={classes.Info}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { WingBlank, List, WhiteSpace, Icon } from 'antd-mobile'
-import dayjs from 'dayjs'
+import moment from 'moment'
 import { connect } from 'react-redux'
 import { delRecord } from 'store/record/actions'
 import API from 'api'
@@ -55,7 +55,7 @@ class Detail extends Component<RouteComponentProps<{ key: string }> & IProps> {
     const { category, date, amount, type, mark, key } = this.state
     const { go } = this.props.history
     const day =
-      '週' + ['日', '一', '二', '三', '四', '五', '六'][dayjs(date).day()]
+      '週' + ['日', '一', '二', '三', '四', '五', '六'][moment(date).day()]
     return (
       <div className={classes.Detail}>
         <Navbar

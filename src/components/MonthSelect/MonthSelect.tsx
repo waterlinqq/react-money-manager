@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react'
 import { DatePickerView } from 'antd-mobile'
-import dayjs from 'dayjs'
+import moment from 'moment'
 
 import classes from './MonthSelect.module.scss'
 
@@ -19,7 +19,7 @@ const MonthSelect: FC<IProps> = ({ month, monthChanged }) => {
   return (
     <div className={classes.MonthSelect}>
       <div onClick={() => setIsShow(!isShow)}>
-        <span>{dayjs(month).format('YYYY年M月')}</span>
+        <span>{moment(month).format('YYYY年M月')}</span>
         <span className={classes.Dropdown} />
       </div>
       <div className={classes.Mask} style={isHidden} onClick={confirmHandler} />

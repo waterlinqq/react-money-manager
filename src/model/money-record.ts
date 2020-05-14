@@ -1,6 +1,6 @@
 import BaseModel from './base-model'
 import { IRecord } from 'typings'
-import dayjs from 'dayjs'
+import moment from 'moment'
 
 const MONEYRECORD = 'MONEYRECORD'
 interface IMoneyRecords {
@@ -71,8 +71,8 @@ class MoneyRecord extends BaseModel {
     return new Promise((resolve, reject) => {
       if (filter instanceof Date) {
         const result = {} as IMoneyRecords
-        const startAt = dayjs(filter).format('YYYY-MM-01')
-        const endAt = dayjs(filter).format('YYYY-MM-31')
+        const startAt = moment(filter).format('YYYY-MM-01')
+        const endAt = moment(filter).format('YYYY-MM-31')
         for (const [key, record] of Object.entries(this.data)) {
           if (record.date >= startAt && record.date <= endAt) {
             result[key] = record

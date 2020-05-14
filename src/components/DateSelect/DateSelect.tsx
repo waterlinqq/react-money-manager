@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react'
 import { Calendar } from 'antd-mobile'
-import dayjs from 'dayjs'
+import moment from 'moment'
 
 import classes from './DateSelect.module.scss'
 
@@ -12,13 +12,13 @@ const DateSelect: FC<IProps> = ({ date, dateChanged }) => {
   const [isShow, setIsShow] = useState(false)
   const togglerHandler = (show: boolean) => () => setIsShow(show)
   const confirmHandler = (day?: Date) => {
-    dateChanged(dayjs(day).format('YYYY-MM-DD'))
+    dateChanged(moment(day).format('YYYY-MM-DD'))
     setIsShow(false)
   }
   return (
     <div className={classes.DateSelect}>
       <div className={classes.Toggle} onClick={togglerHandler(true)}>
-        <span>日期：{dayjs(date).format('MM/DD')}</span>
+        <span>日期：{moment(date).format('MM/DD')}</span>
         <span className={classes.Dropdown} />
       </div>
       <Calendar

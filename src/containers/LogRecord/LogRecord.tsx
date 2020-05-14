@@ -12,7 +12,7 @@ import { addRecord, modRecord } from 'store/record/actions'
 import API from 'api'
 
 import { IIcon, Spending } from 'typings'
-import dayjs from 'dayjs'
+import moment from 'moment'
 
 const icons: Array<Omit<IIcon, 'url'>> = [
   { type: 'cost', text: '食物' },
@@ -44,7 +44,7 @@ class LogRecord extends Component<
     amount: 0,
     mark: '',
     category: '',
-    date: dayjs().format('YYYY-MM-DD'),
+    date: moment().format('YYYY-MM-DD'),
   }
   public async componentWillMount() {
     const { key } = this.props.match.params
