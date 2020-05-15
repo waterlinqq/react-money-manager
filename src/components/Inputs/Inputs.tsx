@@ -19,9 +19,11 @@ const Inputs: FC<IProps> = ({
   submit,
 }) => {
   const numberInput = useRef(null)
-  useEffect(() => {
-    ;(numberInput.current as any).focus()
-  }, [category])
+  const focusNumberInput = () => {
+    // Delay focus to prevent subsequent out-of-focus event triggered by clicking grid
+    setTimeout(() => (numberInput.current as any).focus(), 100)
+  }
+  useEffect(focusNumberInput, [category])
   return (
     <div className={classes.Inputs}>
       {category ? (
@@ -35,6 +37,7 @@ const Inputs: FC<IProps> = ({
         <InputItem
           type={'text'}
           onChange={markChanged}
+          onBlur={focusNumberInput}
           value={mark}
           placeholder="備註"
         />

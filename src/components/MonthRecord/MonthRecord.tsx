@@ -21,10 +21,12 @@ const indexByDate = (monthData: IFbRecords) => {
   }, {} as IMonthDataByDate)
 }
 const MonthRecord: FC<IProps> = ({ monthData }) => {
+  // debugger
   const monthDataByDate = indexByDate(monthData)
-  const sortedMonthData = Object.values(monthDataByDate).sort((a, b) =>
-    a[0].date > b[0].date ? -1 : 1
-  ) // descended by date
+  const sortedMonthData = Object.entries(monthDataByDate)
+    .sort((a, b) => (a[0] > b[0] ? -1 : 1))
+    .map((entry) => entry[1])
+  // descended by date
 
   return (
     <Fragment>

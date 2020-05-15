@@ -11,10 +11,11 @@ import MonthRecord from 'components/MonthRecord/MonthRecord'
 import { AppState } from 'store'
 import { monthSet } from 'store/month/actions'
 import { proxyR } from 'utils/other'
+import { login } from 'utils/auth'
 
 import classes from './Main.module.scss'
 
-import { IFbRecords } from 'typings'
+import { IFbRecords, User } from 'typings'
 
 interface IState {
   isShowSidebar: boolean
@@ -22,6 +23,7 @@ interface IState {
 interface IProps {
   records: IFbRecords
   month: Date
+  user: User
   monthSet: typeof monthSet
 }
 class Main extends Component<IProps, IState> {
@@ -38,7 +40,7 @@ class Main extends Component<IProps, IState> {
     this.props.monthSet(date)
   }
   public render() {
-    const { records } = this.props
+    const { records, user } = this.props
     const proxyRecords = proxyR(records)
     return (
       <div className={classes.Main}>
@@ -54,6 +56,7 @@ class Main extends Component<IProps, IState> {
               monthChanged={this.monthChangedHandler}
             />
           }
+          rightIcon={<div className="benefit-img" />}
         />
         <WingBlank>
           <WhiteSpace />
@@ -63,13 +66,16 @@ class Main extends Component<IProps, IState> {
             balance={proxyRecords.balance}
           />
           <WhiteSpace />
-          <NoticeBar
-            mode="closable"
-            className={classes.Notice}
-            icon={<Icon type="check-circle-o" size="xxs" />}
-          >
-            請儘快登入，避免丟失數據
-          </NoticeBar>
+          {user ? null : (
+            <NoticeBar
+              mode="closable"
+              className={classes.Notice}
+              icon={<Icon type="check-circle-o" size="xxs" />}
+              onClick={login}
+            >
+              請儘快登入，避免丟失數據
+            </NoticeBar>
+          )}
           <WhiteSpace />
           <MonthRecord monthData={records} />
         </WingBlank>
@@ -82,6 +88,7 @@ class Main extends Component<IProps, IState> {
 const mapStateToProps = (state: AppState) => ({
   records: state.records,
   month: state.month,
+  user: state.user,
 })
 
 export default connect(mapStateToProps, { monthSet })(Main)

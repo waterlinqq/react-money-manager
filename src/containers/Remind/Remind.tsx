@@ -36,6 +36,15 @@ class Remind extends Component<RouteComponentProps & IProps> {
       value,
     })
   }
+  public timeChangerHandler = (key: string) => (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const time = e.target.value
+    if (time === '') {
+      this.props.delReminder(key)
+    }
+    this.props.modReminder(key, { time })
+  }
   public clickAddHandler = () => {
     // to avoid repeated trigger open when click Ok button
     if (this.state.isOpen) {
@@ -81,6 +90,7 @@ class Remind extends Component<RouteComponentProps & IProps> {
               <input
                 type="time"
                 value={reminder.time}
+                onChange={this.timeChangerHandler(key)}
                 style={{
                   backgroundColor: 'transparent',
                   border: 'none',

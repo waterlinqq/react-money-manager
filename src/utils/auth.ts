@@ -9,7 +9,6 @@ export const logout = () => {
 }
 
 export const login = async () => {
-  alert('')
   const provider = new firebase.auth.GoogleAuthProvider()
   firebase.auth().signInWithRedirect(provider)
 }
