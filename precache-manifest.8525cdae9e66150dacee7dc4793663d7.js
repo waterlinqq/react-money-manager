@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "53d28bfe47a671e3f4df81cc883fffec",
+    "revision": "02392e3da483bb1b71303444239a48ee",
     "url": "/react-money-manager/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-money-manager/static/css/2.5b97491d.chunk.css"
   },
   {
-    "revision": "3d2a99e71a4322bd6041",
+    "revision": "17243b8df7666fd73d66",
     "url": "/react-money-manager/static/css/main.497b1c69.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-money-manager/static/js/2.6e5860fb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3d2a99e71a4322bd6041",
-    "url": "/react-money-manager/static/js/main.dfa8d9e4.chunk.js"
+    "revision": "17243b8df7666fd73d66",
+    "url": "/react-money-manager/static/js/main.c1c2913d.chunk.js"
   },
   {
     "revision": "4bdfe254ab8be4f14d42",

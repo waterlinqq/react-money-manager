@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/react-money-manager/static/css/main.497b1c69.chunk.css",
-    "main.js": "/react-money-manager/static/js/main.dfa8d9e4.chunk.js",
-    "main.js.map": "/react-money-manager/static/js/main.dfa8d9e4.chunk.js.map",
+    "main.js": "/react-money-manager/static/js/main.c1c2913d.chunk.js",
+    "main.js.map": "/react-money-manager/static/js/main.c1c2913d.chunk.js.map",
     "runtime-main.js": "/react-money-manager/static/js/runtime-main.90d4b770.js",
     "runtime-main.js.map": "/react-money-manager/static/js/runtime-main.90d4b770.js.map",
     "static/css/2.5b97491d.chunk.css": "/react-money-manager/static/css/2.5b97491d.chunk.css",
     "static/js/2.6e5860fb.chunk.js": "/react-money-manager/static/js/2.6e5860fb.chunk.js",
     "static/js/2.6e5860fb.chunk.js.map": "/react-money-manager/static/js/2.6e5860fb.chunk.js.map",
     "index.html": "/react-money-manager/index.html",
-    "precache-manifest.38d74fc62c10e1071f6d25d974737e73.js": "/react-money-manager/precache-manifest.38d74fc62c10e1071f6d25d974737e73.js",
+    "precache-manifest.8525cdae9e66150dacee7dc4793663d7.js": "/react-money-manager/precache-manifest.8525cdae9e66150dacee7dc4793663d7.js",
     "service-worker.js": "/react-money-manager/service-worker.js",
     "static/css/2.5b97491d.chunk.css.map": "/react-money-manager/static/css/2.5b97491d.chunk.css.map",
     "static/css/main.497b1c69.chunk.css.map": "/react-money-manager/static/css/main.497b1c69.chunk.css.map",
@@ -36,6 +36,6 @@
     "static/css/2.5b97491d.chunk.css",
     "static/js/2.6e5860fb.chunk.js",
     "static/css/main.497b1c69.chunk.css",
-    "static/js/main.dfa8d9e4.chunk.js"
+    "static/js/main.c1c2913d.chunk.js"
   ]
 }
