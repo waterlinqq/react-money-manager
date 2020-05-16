@@ -1,5 +1,8 @@
 import React, { FC } from 'react'
 import { List, Progress } from 'antd-mobile'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+
+import { Spending } from 'typings'
 
 import classes from './RecordItem.module.scss'
 
@@ -8,10 +11,23 @@ interface IProps {
   amount: number
   ratio: number
   bar: number
+  type: Spending
 }
-const RecordItem: FC<IProps> = ({ category, amount, ratio, bar }) => {
+const RecordItem: FC<RouteComponentProps & IProps> = ({
+  category,
+  amount,
+  ratio,
+  bar,
+  history,
+  type,
+}) => {
   return (
-    <List.Item style={{ padding: '0px' }}>
+    <List.Item
+      style={{ padding: '0px' }}
+      onClick={() =>
+        history.push(`/category-view/?type=${type}&category=${category}`)
+      }
+    >
       <div className={classes.Wrapper}>
         <img src={require(`images/icons/${category}.svg`)} alt="" />
         <div className={classes.Info}>
@@ -32,4 +48,4 @@ const RecordItem: FC<IProps> = ({ category, amount, ratio, bar }) => {
   )
 }
 
-export default RecordItem
+export default withRouter(RecordItem)

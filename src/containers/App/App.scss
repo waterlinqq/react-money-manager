@@ -1,0 +1,51 @@
+.forward-enter {
+  position: absolute;
+  transform: translateX(100%);
+  z-index: 2;
+}
+
+.forward-enter-active {
+  position: absolute;
+  transform: translateX(0);
+  transition: all 400ms ease;
+  z-index: 2;
+}
+
+.forward-exit {
+  position: absolute;
+  z-index: 1;
+  filter: brightness(1);
+}
+
+.forward-exit-active {
+  position: absolute;
+  z-index: 1;
+  filter: brightness(0.5) blur(3px);
+  transition: all 400ms ease;
+}
+
+.back-enter {
+  position: absolute;
+  filter: brightness(0.5) blur(3px);
+  z-index: 1;
+}
+
+.back-enter-active {
+  position: absolute;
+  z-index: 1;
+  filter: brightness(1);
+  transition: all 400ms ease;
+}
+
+.back-exit {
+  position: absolute;
+  z-index: 1;
+  transform: translateX(0);
+}
+
+.back-exit-active {
+  position: absolute;
+  z-index: 1;
+  transform: translate(100%);
+  transition: all 400ms ease;
+}

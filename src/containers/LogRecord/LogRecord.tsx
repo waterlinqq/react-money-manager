@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Icon } from 'antd-mobile'
+import moment from 'moment'
 
 import Navbar from 'components/UI/Navbar/Navbar'
 import Grids from 'components/UI/Grids/Grids'
@@ -11,8 +12,9 @@ import DateSelect from 'components/DateSelect/DateSelect'
 import { addRecord, modRecord } from 'store/record/actions'
 import API from 'api'
 
+import classes from './LogRecord.module.scss'
+
 import { IIcon, Spending } from 'typings'
-import moment from 'moment'
 
 const icons: Array<Omit<IIcon, 'url'>> = [
   { type: 'cost', text: '食物' },
@@ -94,7 +96,7 @@ class LogRecord extends Component<
         url: require(`images/icons/${item.text}.svg`),
       }))
     return (
-      <div>
+      <div className={classes.LogRecord}>
         <Navbar
           leftIcon={
             <Icon type="left" onClick={() => this.props.history.go(-1)} />

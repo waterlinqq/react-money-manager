@@ -11,6 +11,8 @@ import { monthSet } from 'store/month/actions'
 import { AppState } from 'store'
 import { proxyR } from 'utils/other'
 
+import classes from './Overview.module.scss'
+
 import { Spending, IFbRecords } from 'typings.js'
 
 interface IProps {
@@ -25,7 +27,9 @@ class Overview extends Component<
   public canvas = createRef<HTMLCanvasElement>()
   public sortedCategories: Array<[string, number]> = []
   public proxyRecords = {} as ReturnType<typeof proxyR>
-
+  public shouldComponentUpdate(nextProps: IProps) {
+    return nextProps.records !== this.props.records
+  }
   public render() {
     const { type } = this.props.match.params
     const { records, history, month, monthSet } = this.props
@@ -49,7 +53,7 @@ class Overview extends Component<
     )
 
     return (
-      <div>
+      <div className={classes.Overview}>
         <Navbar
           leftIcon={<Icon type="left" onClick={() => history.go(-1)} />}
           mainItem={<MonthSelect month={month} monthChanged={monthSet} />}

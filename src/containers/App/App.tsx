@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import { Route, Switch, BrowserRouter, withRouter } from 'react-router-dom'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 
 import { getRecord } from 'store/record/actions'
@@ -10,9 +11,38 @@ import Detail from '../Detail/Detail'
 import Overview from '../Overview/Overview'
 import Setting from '../Setting/Setting'
 import Remind from '../Remind/Remind'
+import CategoryView from '../CategoryView/CategoryView'
 import { AppState } from 'store'
 import { listenAuth } from 'utils/auth'
 import { User } from 'typings'
+
+import './App.scss'
+const ANIMATION_MAP = {
+  PUSH: 'forward',
+  POP: 'back',
+}
+const Routes = withRouter(({ location, history }) => (
+  <TransitionGroup
+    childFactory={(child) =>
+      React.cloneElement(child, {
+        classNames: ANIMATION_MAP[history.action as 'PUSH' | 'POP'],
+      })
+    }
+  >
+    <CSSTransition timeout={400} classNames={'fade'} key={location.pathname}>
+      <Switch location={location}>
+        <Route exact={true} path="/log/:key" component={LogRecord} />
+        <Route exact={true} path="/log/" component={LogRecord} />
+        <Route exact={true} path="/overview/:type" component={Overview} />
+        <Route exact={true} path="/remind/" component={Remind} />
+        <Route exact={true} path="/setting/" component={Setting} />
+        <Route exact={true} path="/category-view/" component={CategoryView} />
+        <Route exact={true} path="/detail/:key" component={Detail} />
+        <Route exact={true} path="/" component={Main} />
+      </Switch>
+    </CSSTransition>
+  </TransitionGroup>
+))
 
 interface IProps {
   getRecord: typeof getRecord
@@ -20,6 +50,7 @@ interface IProps {
   month: Date
   user: User
 }
+
 class App extends Component<IProps> {
   public componentWillMount() {
     listenAuth()
@@ -34,15 +65,7 @@ class App extends Component<IProps> {
   public render() {
     return (
       <BrowserRouter>
-        <Switch>
-          <Route path="/log/:key" component={LogRecord} />
-          <Route path="/log/" component={LogRecord} />
-          <Route path="/detail/:key" component={Detail} />
-          <Route path="/overview/:type" component={Overview} />
-          <Route path="/remind/" component={Remind} />
-          <Route path="/setting/" component={Setting} />
-          <Route path="/" component={Main} />
-        </Switch>
+        <Routes />
       </BrowserRouter>
     )
   }

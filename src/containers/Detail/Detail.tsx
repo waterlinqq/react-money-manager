@@ -21,15 +21,17 @@ class Detail extends Component<RouteComponentProps<{ key: string }> & IProps> {
     key: '',
     type: '',
     amount: 0,
-    category: '',
+    category: '其他',
     date: '',
     mark: '',
-    isLoading: true,
   }
   public async componentDidMount() {
     const { key } = this.props.match.params
     const records = await API.reqGetRecord(key)
     const record = Object.values(records)[0]
+    if (record == null) {
+      return
+    }
     this.setState({
       key,
       type: record.type,
@@ -37,7 +39,6 @@ class Detail extends Component<RouteComponentProps<{ key: string }> & IProps> {
       category: record.category,
       date: record.date,
       mark: record.mark,
-      isLoading: false,
     })
   }
   public deleteHandler = () => {
@@ -49,9 +50,10 @@ class Detail extends Component<RouteComponentProps<{ key: string }> & IProps> {
     this.props.history.go(-1)
   }
   public render() {
-    if (this.state.isLoading) {
-      return null
-    }
+    // take isLoading state away since rendering null looks weird when router transition
+    // if (this.state.isLoading) {
+    //   return null
+    // }
     const { category, date, amount, type, mark, key } = this.state
     const { go } = this.props.history
     const day =
