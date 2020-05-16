@@ -1,0 +1,29 @@
+.Wrapper {
+  font-size: 16px;
+  display: flex;
+  padding: 5px 0px;
+  flex-direction: row;
+  img {
+    margin-right: 20px;
+    align-self: center;
+  }
+  .Info {
+    flex-grow: 1;
+    .Title {
+    }
+
+    .Amount {
+      text-align: right;
+      float: right;
+    }
+    .Ratio {
+      padding-left: 10px;
+      font-size: 14px;
+      color: #999;
+    }
+    .Date {
+      color: #bbb;
+      font-size: 8px;
+    }
+  }
+}

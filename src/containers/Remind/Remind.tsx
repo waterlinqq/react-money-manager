@@ -11,6 +11,8 @@ import { AppState } from 'store'
 import { delReminder, modReminder, addReminder } from 'store/reminder/actions'
 
 import 'antd/es/time-picker/style/css'
+import classes from './Remind.module.scss'
+
 import { IFbReminders } from 'typings'
 
 const Item = List.Item
@@ -70,7 +72,7 @@ class Remind extends Component<RouteComponentProps & IProps> {
     const go = this.props.history.go
 
     return (
-      <div className="Setting">
+      <div className={classes.Remind}>
         <Navbar
           leftIcon={<Icon type={'left'} onClick={() => go(-1)} />}
           mainItem={<h3>智能提醒</h3>}

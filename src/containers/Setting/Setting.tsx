@@ -5,7 +5,10 @@ import { connect } from 'react-redux'
 
 import Navbar from 'components/UI/Navbar/Navbar'
 import { AppState } from 'store'
+
 import { IFbReminders } from 'typings'
+
+import classes from './Setting.module.scss'
 
 const Item = List.Item
 const Brief = Item.Brief
@@ -25,7 +28,7 @@ class Setting extends Component<RouteComponentProps & IProps> {
     const history = this.props.history
     const times = this.getReminderTimes()
     return (
-      <div>
+      <div className={classes.Setting}>
         <Navbar
           leftIcon={<Icon type={'left'} onClick={() => history.go(-1)} />}
           mainItem={<h3>設置</h3>}
