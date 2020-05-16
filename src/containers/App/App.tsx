@@ -31,14 +31,14 @@ const Routes = withRouter(({ location, history }) => (
   >
     <CSSTransition timeout={400} classNames={'fade'} key={location.pathname}>
       <Switch location={location}>
-        <Route exact={true} path="/log/:key" component={LogRecord} />
-        <Route exact={true} path="/log/" component={LogRecord} />
-        <Route exact={true} path="/overview/:type" component={Overview} />
-        <Route exact={true} path="/remind/" component={Remind} />
-        <Route exact={true} path="/setting/" component={Setting} />
-        <Route exact={true} path="/category-view/" component={CategoryView} />
-        <Route exact={true} path="/detail/:key" component={Detail} />
-        <Route exact={true} path="/" component={Main} />
+        <Route path="/log/:key" component={LogRecord} />
+        <Route path="/log/" component={LogRecord} />
+        <Route path="/overview/:type" component={Overview} />
+        <Route path="/remind/" component={Remind} />
+        <Route path="/setting/" component={Setting} />
+        <Route path="/category-view/" component={CategoryView} />
+        <Route path="/detail/:key" component={Detail} />
+        <Route path="/" component={Main} />
       </Switch>
     </CSSTransition>
   </TransitionGroup>
