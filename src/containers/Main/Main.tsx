@@ -56,7 +56,6 @@ class Main extends Component<IProps, IState> {
               monthChanged={this.monthChangedHandler}
             />
           }
-          rightIcon={<div className="benefit-img" />}
         />
         <WingBlank>
           <WhiteSpace />

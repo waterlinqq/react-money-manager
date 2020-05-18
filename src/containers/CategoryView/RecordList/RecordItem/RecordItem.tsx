@@ -10,6 +10,7 @@ interface IProps {
   ratio: number
   bar: number
   id: string
+  type: Spending
 }
 const RecordItem: FC<RouteComponentProps & IProps> = ({
   record,
@@ -17,6 +18,7 @@ const RecordItem: FC<RouteComponentProps & IProps> = ({
   bar,
   id,
   history,
+  type,
 }) => {
   return (
     <List.Item
@@ -24,7 +26,7 @@ const RecordItem: FC<RouteComponentProps & IProps> = ({
       onClick={() => history.push(`/detail/${id}`)}
     >
       <div className={classes.Wrapper}>
-        <img src={require(`images/icons/${record.category}.svg`)} alt="" />
+        <div data-img className={`${type}-img ${record.category}`} />
         <div className={classes.Info}>
           <span className={classes.Title}>{record.category}</span>
           <span className={classes.Amount}>{record.amount}</span>

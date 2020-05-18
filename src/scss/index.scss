@@ -2,3 +2,156 @@
   padding: 0;
   margin: 0;
 }
+@function getCy($y) {
+  @return ($y * 14.26666%);
+}
+@function getx($x) {
+  @return ($x * 33.33%);
+}
+@function getBy($y) {
+  @return ($y * 50%);
+}
+.cost-img {
+  width: 30px;
+  height: 30px;
+  background-size: 118px;
+  display: inline-block;
+  background-image: url('../images/system/cost.jpg');
+  &.水電費 {
+    background-position: getx(0) getCy(0);
+  }
+  &.交通 {
+    background-position: getx(1) getCy(0);
+  }
+  &.家 {
+    background-position: getx(2) getCy(0);
+  }
+  &.車 {
+    background-position: getx(3) getCy(0);
+  }
+  &.娛樂 {
+    background-position: getx(0) getCy(1);
+  }
+  &.服裝 {
+    background-position: getx(1) getCy(1);
+  }
+  &.保險 {
+    background-position: getx(2) getCy(1);
+  }
+  &.税 {
+    background-position: getx(3) getCy(1);
+  }
+  &.電話費 {
+    background-position: getx(0) getCy(2);
+  }
+  &.香煙 {
+    background-position: getx(1) getCy(2);
+  }
+  &.健康 {
+    background-position: getx(2) getCy(2);
+  }
+  &.運動 {
+    background-position: getx(3) getCy(2);
+  }
+  &.孩子 {
+    background-position: getx(0) getCy(3);
+  }
+  &.寵物 {
+    background-position: getx(1) getCy(3);
+  }
+  &.美容 {
+    background-position: getx(2) getCy(3);
+  }
+  &.電子產品 {
+    background-position: getx(3) getCy(3);
+  }
+  &.漢堡包 {
+    background-position: getx(0) getCy(4);
+  }
+  &.酒類 {
+    background-position: getx(1) getCy(4);
+  }
+  &.蔬菜 {
+    background-position: getx(2) getCy(4);
+  }
+  &.小吃 {
+    background-position: getx(3) getCy(4);
+  }
+  &.禮品 {
+    background-position: getx(0) getCy(5);
+  }
+  &.社交 {
+    background-position: getx(1) getCy(5);
+  }
+  &.旅行 {
+    background-position: getx(2) getCy(5);
+  }
+  &.教育 {
+    background-position: getx(3) getCy(5);
+  }
+  &.水果 {
+    background-position: getx(0) getCy(6);
+  }
+  &.辦公 {
+    background-position: getx(1) getCy(6);
+  }
+  &.書 {
+    background-position: getx(2) getCy(6);
+  }
+  &.吧 {
+    background-position: getx(3) getCy(6);
+  }
+  &.購物 {
+    background-position: getx(0) getCy(7);
+  }
+  &.其他 {
+    background-position: getx(1) getCy(7);
+  }
+  &.餐飲 {
+    background-position: getx(2) getCy(7);
+  }
+  &.其他 {
+    background-image: url('../images/system/benefit.jpg');
+    background-position: getx(2) getBy(2);
+  }
+}
+.benefit-img {
+  width: 30px;
+  height: 30px;
+  background-size: 118px;
+  display: inline-block;
+  background-image: url('../images/system/benefit.jpg');
+  &.薪水 {
+    background-position: getx(0) getBy(0);
+  }
+  &.獎金 {
+    background-position: getx(1) getBy(0);
+  }
+  &.捐贈 {
+    background-position: getx(2) getBy(0);
+  }
+  &.買賣 {
+    background-position: getx(3) getBy(0);
+  }
+  &.出租 {
+    background-position: getx(0) getBy(1);
+  }
+  &.退款 {
+    background-position: getx(1) getBy(1);
+  }
+  &.優惠卷 {
+    background-position: getx(2) getBy(1);
+  }
+  &.彩票 {
+    background-position: getx(3) getBy(1);
+  }
+  &.股息 {
+    background-position: getx(0) getBy(2);
+  }
+  &.投資 {
+    background-position: getx(1) getBy(2);
+  }
+  &.其他 {
+    background-position: getx(2) getBy(2);
+  }
+}

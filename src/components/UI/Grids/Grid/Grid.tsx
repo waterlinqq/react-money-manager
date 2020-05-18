@@ -1,15 +1,17 @@
 import React, { FC } from 'react'
 import classes from './Grid.module.scss'
+import { Spending } from 'typings'
 interface IProps {
-  url: string
-  text: string
+  category: string
+  type: Spending
   clicked(cate: string): void
 }
-const Grid: FC<IProps> = ({ url, text, clicked }) => {
+const Grid: FC<IProps> = ({ category, type, clicked }) => {
   return (
-    <div className={classes.Grid} onClick={() => clicked(text)}>
-      <img src={url} alt={text} />
-      <span>{text}</span>
+    <div className={classes.Grid} onClick={() => clicked(category)}>
+      {/* <img src={url} alt={text} /> */}
+      <div className={`${type}-img ${category}`} />
+      <span>{category}</span>
     </div>
   )
 }

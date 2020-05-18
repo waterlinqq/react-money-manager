@@ -29,7 +29,7 @@ const RecordItem: FC<RouteComponentProps & IProps> = ({
       }
     >
       <div className={classes.Wrapper}>
-        <img src={require(`images/icons/${category}.svg`)} alt="" />
+        <div data-img className={`${type}-img ${category}`} />
         <div className={classes.Info}>
           <span className={classes.Title}>{category}</span>
           <span className={classes.Amount}>{amount}</span>

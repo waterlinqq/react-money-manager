@@ -6,11 +6,12 @@
   align-items: center;
   justify-content: center;
   transition: 0.3s all ease-in-out;
-  img {
-    width: 35%;
-    padding-bottom: 8px;
-  }
   &:active {
-    background-color: #eee;
+    filter: brightness(0.9);
+    /*the image format is jpg so changing background-color the white backgroud becomes clear */
+    // background-color: #eee;
+  }
+  span {
+    margin-top: 5px;
   }
 }

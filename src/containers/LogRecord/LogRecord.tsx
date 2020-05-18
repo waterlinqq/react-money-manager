@@ -16,15 +16,50 @@ import classes from './LogRecord.module.scss'
 
 import { IIcon, Spending } from 'typings'
 
-const icons: Array<Omit<IIcon, 'url'>> = [
-  { type: 'cost', text: '食物' },
+const icons: IIcon[] = [
+  { type: 'cost', text: '水電費' },
   { type: 'cost', text: '交通' },
-  { type: 'cost', text: '購物' },
-  { type: 'cost', text: '電話' },
-  { type: 'cost', text: '住宿' },
-  { type: 'cost', text: '醫療' },
+  { type: 'cost', text: '家' },
+  { type: 'cost', text: '車' },
+  { type: 'cost', text: '娛樂' },
+  { type: 'cost', text: '服裝' },
+  { type: 'cost', text: '保險' },
+  { type: 'cost', text: '税' },
+  { type: 'cost', text: '電話費' },
+  { type: 'cost', text: '香煙' },
+  { type: 'cost', text: '健康' },
+  { type: 'cost', text: '運動' },
+  { type: 'cost', text: '孩子' },
   { type: 'cost', text: '寵物' },
-  { type: 'benefit', text: '寵物' },
+  { type: 'cost', text: '美容' },
+  { type: 'cost', text: '電子產品' },
+  { type: 'cost', text: '漢堡包' },
+  { type: 'cost', text: '酒類' },
+  { type: 'cost', text: '蔬菜' },
+  { type: 'cost', text: '小吃' },
+  { type: 'cost', text: '禮品' },
+  { type: 'cost', text: '社交' },
+  { type: 'cost', text: '旅行' },
+  { type: 'cost', text: '教育' },
+  { type: 'cost', text: '水果' },
+  { type: 'cost', text: '辦公' },
+  { type: 'cost', text: '書' },
+  { type: 'cost', text: '吧' },
+  { type: 'cost', text: '購物' },
+  { type: 'cost', text: '其他' },
+  { type: 'cost', text: '餐飲' },
+  { type: 'cost', text: '其他' },
+  { type: 'benefit', text: '薪水' },
+  { type: 'benefit', text: '獎金' },
+  { type: 'benefit', text: '捐贈' },
+  { type: 'benefit', text: '買賣' },
+  { type: 'benefit', text: '出租' },
+  { type: 'benefit', text: '退款' },
+  { type: 'benefit', text: '優惠卷' },
+  { type: 'benefit', text: '彩票' },
+  { type: 'benefit', text: '股息' },
+  { type: 'benefit', text: '投資' },
+  { type: 'benefit', text: '其他' },
 ]
 interface IProps {
   addRecord: typeof addRecord
@@ -89,12 +124,13 @@ class LogRecord extends Component<
   }
   public render() {
     const { type, amount, category, mark, date } = this.state
-    const iconsWithImg: IIcon[] = icons
-      .filter((item) => item.type === type)
-      .map((item) => ({
-        ...item,
-        url: require(`images/icons/${item.text}.svg`),
-      }))
+    const showIcons = icons.filter((item) => item.type === type)
+    // const iconsWithImg: IIcon[] = icons
+    //   .filter((item) => item.type === type)
+    //   .map((item) => ({
+    //     ...item,
+    //     url: require(`images/icons/${item.text}.svg`),
+    //   }))
     return (
       <div className={classes.LogRecord}>
         <Navbar
@@ -106,8 +142,9 @@ class LogRecord extends Component<
             <DateSelect date={date} dateChanged={this.dateChangeHandler} />
           }
         />
-        <Grids icons={iconsWithImg} clicked={this.gridClickHandler} />
+        <Grids type={type} icons={showIcons} clicked={this.gridClickHandler} />
         <Inputs
+          type={type}
           amount={amount}
           mark={mark}
           category={category}

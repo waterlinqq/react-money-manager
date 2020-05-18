@@ -1,8 +1,10 @@
 import React, { useRef, useEffect, FC } from 'react'
 import { InputItem } from 'antd-mobile'
 import classes from './Inputs.module.scss'
+import { Spending } from 'typings'
 
 interface IProps {
+  type: Spending
   category: string
   amount: number
   mark: string
@@ -11,6 +13,7 @@ interface IProps {
   submit(): void
 }
 const Inputs: FC<IProps> = ({
+  type,
   category,
   amount,
   markChanged,
@@ -27,11 +30,8 @@ const Inputs: FC<IProps> = ({
   return (
     <div className={classes.Inputs}>
       {category ? (
-        <img
-          className={classes.Icon}
-          src={require(`images/icons/${category}.svg`)}
-          alt={category}
-        />
+        // data-img custom attribute is an attribute selector to scss file
+        <div data-img className={`${type}-img ${category} `} />
       ) : null}
       <div className={classes.Input}>
         <InputItem

@@ -3,15 +3,8 @@
   display: flex;
   padding: 5px 0px;
   flex-direction: row;
-  img {
-    margin-right: 20px;
-    align-self: center;
-  }
   .Info {
     flex-grow: 1;
-    .Title {
-    }
-
     .Amount {
       text-align: right;
       float: right;
@@ -25,5 +18,9 @@
       color: #bbb;
       font-size: 8px;
     }
+  }
+  [data-img] {
+    margin: 0px 10px;
+    align-self: center;
   }
 }

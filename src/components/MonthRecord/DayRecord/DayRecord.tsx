@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import moment from 'moment'
 import { List } from 'antd-mobile'
-import { Link } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import classes from './DayRecord.module.scss'
 import { IFbRecords } from 'typings'
@@ -10,8 +10,7 @@ interface IProps {
   dayData: IFbRecords
 }
 
-const Item = List.Item
-const DayRecord: FC<IProps> = ({ dayData }) => {
+const DayRecord: FC<IProps & RouteComponentProps> = ({ dayData, history }) => {
   const entries = Object.entries(dayData)
   const { date } = entries[0][1]
   const { cost, benefit } = entries.reduce(
@@ -35,17 +34,20 @@ const DayRecord: FC<IProps> = ({ dayData }) => {
       </div>
       <List>
         {entries.map(([key, record]) => (
-          <Link key={key} to={`/detail/${key}`}>
-            <Item
-              thumb={require(`images/icons/${record.category}.svg`)}
-              extra={(record.type === 'cost' ? '-' : '') + record.amount}
-            >
-              {record.category}
-            </Item>
-          </Link>
+          <div
+            key={key}
+            onClick={() => history.push(`/detail/${key}`)}
+            className={classes.Item}
+          >
+            <div className={`${record.type}-img ${record.category}`} />
+            <span className={classes.Title}>{record.category}</span>
+            <span className={classes.Amount}>
+              {(record.type === 'cost' ? '-' : '') + record.amount}
+            </span>
+          </div>
         ))}
       </List>
     </div>
   )
 }
-export default DayRecord
+export default withRouter(DayRecord)

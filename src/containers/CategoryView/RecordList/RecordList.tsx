@@ -29,6 +29,7 @@ const RecordList: FC<IProps> = ({ records, total, type }) => {
               id={key}
               ratio={ratio}
               bar={bar}
+              type={type}
             />
           )
         })}

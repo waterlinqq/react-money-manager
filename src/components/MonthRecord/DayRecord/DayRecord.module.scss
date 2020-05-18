@@ -16,4 +16,25 @@
       }
     }
   }
+  .Item {
+    display: flex;
+    align-items: center;
+    padding: 7px 10px;
+    color: #000;
+    border-bottom: 0.5px solid #f9f9f9;
+    transition: 0.1s all;
+    background-color: #fff;
+    .Amount {
+      margin-left: auto;
+      color: #999;
+      padding: 0 5px;
+    }
+    .Title {
+      font-size: 16px;
+      padding: 0 10px;
+    }
+    &:active {
+      filter: brightness(0.9);
+    }
+  }
 }

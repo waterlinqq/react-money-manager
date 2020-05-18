@@ -19,11 +19,11 @@ interface IProps {
 class Detail extends Component<RouteComponentProps<{ key: string }> & IProps> {
   public state = {
     key: '',
-    type: '',
+    type: 'cost',
     amount: 0,
     category: '其他',
-    date: '',
-    mark: '',
+    date: moment().format('YYYY-MM-DD'),
+    mark: '預設',
   }
   public async componentDidMount() {
     const { key } = this.props.match.params
@@ -75,10 +75,7 @@ class Detail extends Component<RouteComponentProps<{ key: string }> & IProps> {
         <WingBlank>
           <div className={classes.Info}>
             <header>
-              <img
-                src={require(`images/icons/${category}.svg`)}
-                alt={category}
-              />
+              <div data-img className={`${type}-img ${category}`} />
               <h2>{category}</h2>
             </header>
             <WhiteSpace />

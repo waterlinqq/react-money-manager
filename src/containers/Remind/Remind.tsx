@@ -100,10 +100,7 @@ class Remind extends Component<RouteComponentProps & IProps> {
               />
             </Item>
           ))}
-          <Item
-            thumb={<CustomIcon type={require('images/icons/交通.svg')} />}
-            onClick={this.clickAddHandler}
-          >
+          <Item thumb={<CustomIcon />} onClick={this.clickAddHandler}>
             <span>創建提醒 </span>
             <TimePicker
               value={value}
