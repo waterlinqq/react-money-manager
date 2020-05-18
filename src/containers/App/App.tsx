@@ -12,6 +12,7 @@ import Overview from '../Overview/Overview'
 import Setting from '../Setting/Setting'
 import Remind from '../Remind/Remind'
 import CategoryView from '../CategoryView/CategoryView'
+import Start from './Start/Start'
 import { AppState } from 'store'
 import { listenAuth } from 'utils/auth'
 import { User } from 'typings'
@@ -64,9 +65,12 @@ class App extends Component<IProps> {
   public componentDidUpdate = this.componentDidMount
   public render() {
     return (
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
+      <div>
+        <Start />
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
+      </div>
     )
   }
 }

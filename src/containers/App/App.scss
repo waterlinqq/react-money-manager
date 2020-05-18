@@ -20,13 +20,13 @@
 .forward-exit-active {
   position: absolute;
   z-index: 1;
-  filter: brightness(0.5) blur(3px);
+  filter: brightness(0.5);
   transition: all 400ms ease;
 }
 
 .back-enter {
   position: absolute;
-  filter: brightness(0.5) blur(3px);
+  filter: brightness(0.5);
   z-index: 1;
 }
 
