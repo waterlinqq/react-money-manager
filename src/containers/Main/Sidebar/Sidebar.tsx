@@ -49,9 +49,11 @@ const Sidebar: FC<IProps & RouteComponentProps> = ({
 
       <div className={listClassName}>
         <div className={classes.Avatar} onClick={user ? logout : login}>
-          <img src={user?.photoURL || path('登入')} alt="" />
-          <p>{user ? '登出' : '登入'}</p>
-          <p>{user?.displayName || ''}</p>
+          <div>
+            <img src={user?.photoURL || path('登入')} alt="" />
+            <span>{user?.displayName || ''}</span>
+          </div>
+          <p className={classes.Log}>{user ? '登出' : '登入'}</p>
         </div>
         <List>
           <Item

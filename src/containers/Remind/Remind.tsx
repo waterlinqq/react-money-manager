@@ -6,7 +6,6 @@ import { Icon, List, Switch } from 'antd-mobile'
 import { TimePicker } from 'antd'
 
 import Navbar from 'components/UI/Navbar/Navbar'
-import CustomIcon from 'components/UI/CustomIcon/CustomIcon'
 import { AppState } from 'store'
 import { delReminder, modReminder, addReminder } from 'store/reminder/actions'
 
@@ -100,7 +99,8 @@ class Remind extends Component<RouteComponentProps & IProps> {
               />
             </Item>
           ))}
-          <Item thumb={<CustomIcon />} onClick={this.clickAddHandler}>
+          <Item onClick={this.clickAddHandler}>
+            <span className={classes.Plus}> &#43; </span>
             <span>創建提醒 </span>
             <TimePicker
               value={value}
