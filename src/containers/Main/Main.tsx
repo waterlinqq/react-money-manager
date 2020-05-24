@@ -9,7 +9,7 @@ import Sidebar from './Sidebar/Sidebar'
 import MonthSelect from 'components/MonthSelect/MonthSelect'
 import MonthRecord from 'components/MonthRecord/MonthRecord'
 import { AppState } from 'store'
-import { monthSet } from 'store/month/actions'
+import { setMonth } from 'store/month/actions'
 import { proxyR } from 'utils/other'
 import { login } from 'utils/auth'
 
@@ -24,7 +24,7 @@ interface IProps {
   records: IFbRecords
   month: Date
   user: User
-  monthSet: typeof monthSet
+  setMonth: typeof setMonth
 }
 class Main extends Component<IProps, IState> {
   public state = {
@@ -37,7 +37,7 @@ class Main extends Component<IProps, IState> {
     this.setState({ isShowSidebar: !this.state.isShowSidebar })
   }
   public monthChangedHandler = (date: Date) => {
-    this.props.monthSet(date)
+    this.props.setMonth(date)
   }
   public render() {
     const { records, user } = this.props
@@ -90,4 +90,4 @@ const mapStateToProps = (state: AppState) => ({
   user: state.user,
 })
 
-export default connect(mapStateToProps, { monthSet })(Main)
+export default connect(mapStateToProps, { setMonth })(Main)

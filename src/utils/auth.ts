@@ -2,7 +2,7 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import store from 'store'
 
-import { userSet } from 'store/user/actions'
+import { SetUser } from 'store/user/actions'
 
 export const logout = () => {
   firebase.auth().signOut()
@@ -18,10 +18,10 @@ export const listenAuth = () => {
     let action
     if (user) {
       const { email, uid, photoURL, displayName } = firebase.auth().currentUser!
-      action = userSet({ email, uid, photoURL, displayName })
+      action = SetUser({ email, uid, photoURL, displayName })
     } else {
-      action = userSet(null)
+      action = SetUser(null)
     }
-    store.dispatch(action)
+    store.dispatch(action as any)
   })
 }

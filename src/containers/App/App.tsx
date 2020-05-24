@@ -13,9 +13,7 @@ import Setting from '../Setting/Setting'
 import Remind from '../Remind/Remind'
 import CategoryView from '../CategoryView/CategoryView'
 import Start from './Start/Start'
-import { AppState } from 'store'
 import { listenAuth } from 'utils/auth'
-import { User } from 'typings'
 
 import './App.scss'
 const ANIMATION_MAP = {
@@ -48,22 +46,16 @@ const Routes = withRouter(({ location, history }) => (
 interface IProps {
   getRecord: typeof getRecord
   getReminder: typeof getReminder
-  month: Date
-  user: User
 }
 
 class App extends Component<IProps> {
-  public componentWillMount() {
-    listenAuth()
-  }
   public componentDidMount() {
-    // when connected to google account (user changed)
-    // get records and reminders from firebase
-    this.props.getRecord(this.props.month)
+    listenAuth()
+    this.props.getRecord(new Date())
     this.props.getReminder()
   }
-  public componentDidUpdate = this.componentDidMount
   public render() {
+    console.count('render app')
     return (
       <div>
         <Start />
@@ -75,11 +67,7 @@ class App extends Component<IProps> {
   }
 }
 
-const mapStateToProps = (state: AppState) => ({
-  month: state.month,
-  user: state.user,
-})
-export default connect(mapStateToProps, {
+export default connect(() => {}, {
   getRecord,
   getReminder,
 })(App)

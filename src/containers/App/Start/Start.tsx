@@ -10,11 +10,12 @@ const style = {
   backgroundSize: 'cover',
   backgroundImage: `url(${require('images/system/載入.jpg')}`,
 }
-const Start = () => {
+// Start loading effect should take only once.
+const Start = React.memo(() => {
   const [show, setShow] = useState(true)
   useEffect(() => {
     setTimeout(() => setShow(false), 2000)
   }, [])
   return show ? <div style={style} /> : null
-}
+})
 export default Start

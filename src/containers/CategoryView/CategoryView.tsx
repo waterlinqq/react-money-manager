@@ -8,7 +8,7 @@ import MonthSelect from 'components/MonthSelect/MonthSelect'
 import Navbar from 'components/UI/Navbar/Navbar'
 import Chart from './Chart/Chart'
 import RecortList from './RecordList/RecordList'
-import { monthSet } from 'store/month/actions'
+import { setMonth } from 'store/month/actions'
 import { AppState } from 'store'
 import { proxyR } from 'utils/other'
 
@@ -21,7 +21,7 @@ interface IProps extends RouteComponentProps {
   category: string
   records: IFbRecords
   month: Date
-  monthSet: typeof monthSet
+  setMonth: typeof setMonth
 }
 class Overview extends Component<IProps> {
   public canvas = createRef<HTMLCanvasElement>()
@@ -45,7 +45,7 @@ class Overview extends Component<IProps> {
     return amountIndexedByDate
   }
   public render() {
-    const { records, history, month, monthSet } = this.props
+    const { records, history, month, setMonth } = this.props
     const query = new URLSearchParams(this.props.location.search)
     const type = query.get('type') as Spending
     const category = query.get('category') as string
@@ -68,7 +68,7 @@ class Overview extends Component<IProps> {
       <div className={classes.CategoryView}>
         <Navbar
           leftIcon={<Icon type="left" onClick={() => history.go(-1)} />}
-          mainItem={<MonthSelect month={month} monthChanged={monthSet} />}
+          mainItem={<MonthSelect month={month} monthChanged={setMonth} />}
         />
         <WhiteSpace />
         <WingBlank>
@@ -91,4 +91,4 @@ const mapStateToProps = (state: AppState) => ({
   records: state.records,
   month: state.month,
 })
-export default withRouter(connect(mapStateToProps, { monthSet })(Overview))
+export default withRouter(connect(mapStateToProps, { setMonth })(Overview))
