@@ -1,44 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 前言
 
-## Available Scripts
+這是一個以 react 框架開發網頁記帳單頁式應用 App，設計、操作等功能上幾乎是模仿[Google Play - Money Manager](https://play.google.com/store/apps/details?id=money.expense.budget.wallet.manager.track.finance.tracker&hl=en_US)，喜歡本作品的話，推薦下載 App 版本。
 
-In the project directory, you can run:
+**註：本項目僅為練習目的，不具備實質營運意圖。**
 
-### `npm start`
+# 效果演示
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[項目連結](http://waterlinqq.github.io/react-money-manager)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+# 技術棧
 
-### `npm test`
+後端技術：
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- google firebase
 
-### `npm run build`
+前端語言
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- typescript
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+前端框架
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- react / redux / react-router / react-transition-group
+- antd / antd-mobile
 
-### `npm run eject`
+第三方套件
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- chart.js
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+前端樣式
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- scss
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# 目標功能
 
-## Learn More
+- [x] Firebase 註冊、登錄
+- [x] 記帳添加、修改、刪除
+- [x] 記帳呈現月覽、紀錄詳情
+- [x] 記帳紀錄可視化月覽
+- [x] 記帳類別可視化月覽
+- [x] 提醒記帳時間點添加、修改、刪除、開關
+- [x] 推播提醒記帳時間
+- [x] 導出 csv 檔
+- [ ] 類別添加、禁用
+- [ ] Firebase Cloud Message 推播
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# 結語
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+謝謝撥空閱讀，任何問題都可以提出，喜歡的話可以給我顆星星。
