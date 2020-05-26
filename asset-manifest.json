@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/react-money-manager/static/css/main.ec14fbc2.chunk.css",
-    "main.js": "/react-money-manager/static/js/main.9d5e1907.chunk.js",
-    "main.js.map": "/react-money-manager/static/js/main.9d5e1907.chunk.js.map",
+    "main.js": "/react-money-manager/static/js/main.6146b7ac.chunk.js",
+    "main.js.map": "/react-money-manager/static/js/main.6146b7ac.chunk.js.map",
     "runtime-main.js": "/react-money-manager/static/js/runtime-main.90d4b770.js",
     "runtime-main.js.map": "/react-money-manager/static/js/runtime-main.90d4b770.js.map",
     "static/css/2.5b97491d.chunk.css": "/react-money-manager/static/css/2.5b97491d.chunk.css",
-    "static/js/2.7c230aaa.chunk.js": "/react-money-manager/static/js/2.7c230aaa.chunk.js",
-    "static/js/2.7c230aaa.chunk.js.map": "/react-money-manager/static/js/2.7c230aaa.chunk.js.map",
+    "static/js/2.38baffbb.chunk.js": "/react-money-manager/static/js/2.38baffbb.chunk.js",
+    "static/js/2.38baffbb.chunk.js.map": "/react-money-manager/static/js/2.38baffbb.chunk.js.map",
     "index.html": "/react-money-manager/index.html",
-    "precache-manifest.f08c9a9e0b8dab39bf20163d5c585eb4.js": "/react-money-manager/precache-manifest.f08c9a9e0b8dab39bf20163d5c585eb4.js",
+    "precache-manifest.4a5b8248f83ecb0dca139bc8c6bb9ef2.js": "/react-money-manager/precache-manifest.4a5b8248f83ecb0dca139bc8c6bb9ef2.js",
     "service-worker.js": "/react-money-manager/service-worker.js",
     "static/css/2.5b97491d.chunk.css.map": "/react-money-manager/static/css/2.5b97491d.chunk.css.map",
     "static/css/main.ec14fbc2.chunk.css.map": "/react-money-manager/static/css/main.ec14fbc2.chunk.css.map",
-    "static/js/2.7c230aaa.chunk.js.LICENSE.txt": "/react-money-manager/static/js/2.7c230aaa.chunk.js.LICENSE.txt",
+    "static/js/2.38baffbb.chunk.js.LICENSE.txt": "/react-money-manager/static/js/2.38baffbb.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/react-money-manager/static/media/cost.75d1ff17.jpg",
     "static/media/刪除.svg": "/react-money-manager/static/media/刪除.650cdc57.svg",
     "static/media/圖表.svg": "/react-money-manager/static/media/圖表.718c793e.svg",
@@ -28,8 +28,8 @@
   "entrypoints": [
     "static/js/runtime-main.90d4b770.js",
     "static/css/2.5b97491d.chunk.css",
-    "static/js/2.7c230aaa.chunk.js",
+    "static/js/2.38baffbb.chunk.js",
     "static/css/main.ec14fbc2.chunk.css",
-    "static/js/main.9d5e1907.chunk.js"
+    "static/js/main.6146b7ac.chunk.js"
   ]
 }
