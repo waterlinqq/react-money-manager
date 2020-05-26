@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { Route, Switch, BrowserRouter, withRouter } from 'react-router-dom'
+import {
+  Route,
+  Switch,
+  BrowserRouter,
+  withRouter,
+  HashRouter,
+} from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 
@@ -61,9 +67,9 @@ class App extends Component<IProps> {
       <div>
         <Start />
         <ReminderTimer />
-        <BrowserRouter>
+        <HashRouter>
           <Routes />
-        </BrowserRouter>
+        </HashRouter>
       </div>
     )
   }
