@@ -13,6 +13,7 @@ import Setting from '../Setting/Setting'
 import Remind from '../Remind/Remind'
 import CategoryView from '../CategoryView/CategoryView'
 import Start from './Start/Start'
+import ReminderTimer from './ReminderTimer/ReminderTimer'
 import { listenAuth } from 'utils/auth'
 
 import './App.scss'
@@ -59,6 +60,7 @@ class App extends Component<IProps> {
     return (
       <div>
         <Start />
+        <ReminderTimer />
         <BrowserRouter>
           <Routes />
         </BrowserRouter>
@@ -67,7 +69,7 @@ class App extends Component<IProps> {
   }
 }
 
-export default connect(() => {}, {
+export default connect(() => ({}), {
   getRecord,
   getReminder,
 })(App)
